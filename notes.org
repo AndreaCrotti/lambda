@@ -20,6 +20,10 @@
    - decorators short intro
    - methods/classmethods/functions and behaviour
 
+** Toolz
+   
+   - toolz.itemmap(reversed, dic)
+
 ** Generators and higher order functions
 
    - infinite streams
@@ -28,3 +32,8 @@
 ** Testing
 
    - testing pure functions
+   - show the refactor example from the crappy solution to testing with hypothesis
+
+** Resources
+
+   - Okasaki for persistent data structures
