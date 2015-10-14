@@ -1,0 +1,24 @@
+* Functional programming
+
+** Why FP
+
+** Lambda calculus
+
+   - currying
+   - higher order function
+   - map/reduce/whatever
+
+** Design principles
+
+   - OOP issues
+   - designing without classes
+   - composition over inheritance
+
+** Generators and higher order functions
+
+   - infinite streams
+   - relationship between streams and pure functions
+
+** Testing
+
+   - testing pure functions
