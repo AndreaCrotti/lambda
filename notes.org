@@ -14,6 +14,12 @@
    - designing without classes
    - composition over inheritance
 
+** Python and functions
+   
+   - what is a function in Python
+   - decorators short intro
+   - methods/classmethods/functions and behaviour
+
 ** Generators and higher order functions
 
    - infinite streams
