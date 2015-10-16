@@ -8,11 +8,18 @@
    - higher order function
    - map/reduce/whatever
 
+** Side effects and immutability
+
+   - what is a side effect
+   - why is it bad
+   - how to encapsulate them properly
+
 ** Design principles
 
    - OOP issues
    - designing without classes
    - composition over inheritance
+   - parallel with all the states in the universe and how to test with that
 
 ** Python and functions
    
