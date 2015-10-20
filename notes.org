@@ -1,5 +1,6 @@
 * Functional programming
 
+# TODO: add something about recursion and how it should be done properly
 ** Why FP
    
    - concurrency (multicore)
@@ -18,6 +19,11 @@
    - what is a side effect
    - why is it bad
    - how to encapsulate them properly
+
+** Python issues
+   
+   - (almost) everything is mutable
+   - no tail call optimization
 
 ** Design principles
 
