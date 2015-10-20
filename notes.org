@@ -1,12 +1,17 @@
 * Functional programming
 
 ** Why FP
+   
+   - concurrency (multicore)
+   - threading sucks
+   - it's the next big paradigm shift (and it's already happening)
 
 ** Lambda calculus
 
    - currying
    - higher order function
    - map/reduce/whatever
+   - Church numerals introduction
 
 ** Side effects and immutability
 
@@ -29,7 +34,8 @@
 
 ** Toolz
    
-   - toolz.itemmap(reversed, dic)
+   - Show some nice examples such as:
+     toolz.itemmap(reversed, dic)
 
 ** Generators and higher order functions
 
@@ -44,3 +50,4 @@
 ** Resources
 
    - Okasaki for persistent data structures
+   - All Rich Hickey talks
