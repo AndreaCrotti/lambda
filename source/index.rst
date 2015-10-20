@@ -3,13 +3,29 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to lambda's documentation!
-==================================
+Python and functional programming
+=================================
 
 Contents:
 
 .. toctree::
    :maxdepth: 2
+
+
+Refactoring example
+===================
+
+.. literalinclude:: code/refactor/refactor.py
+   :pyobject: long_crappy_function
+
+Refactoring example (end)
+=========================
+
+.. literalinclude:: code/refactor/refactor5.py
+   :pyobject: filter_output
+
+.. literalinclude:: code/refactor/refactor5.py
+   :pyobject: filter_output_shorter
 
 
 

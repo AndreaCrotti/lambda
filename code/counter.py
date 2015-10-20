@@ -40,4 +40,3 @@ def func(rdd):
 
 def transform(func, data):
     return func(data)
-

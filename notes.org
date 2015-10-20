@@ -8,7 +8,8 @@
    - it's the next big paradigm shift (and it's already happening)
 
 ** Lambda calculus
-
+   
+   - full *model* of computation
    - currying
    - higher order function
    - map/reduce/whatever
@@ -19,6 +20,7 @@
    - what is a side effect
    - why is it bad
    - how to encapsulate them properly
+   - demo about refactoring using 
 
 ** Design principles
 
