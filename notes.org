@@ -20,11 +20,6 @@
    - why is it bad
    - how to encapsulate them properly
 
-** Python issues
-   
-   - (almost) everything is mutable
-   - no tail call optimization
-
 ** Design principles
 
    - OOP issues
@@ -32,8 +27,11 @@
    - composition over inheritance
    - parallel with all the states in the universe and how to test with that
 
-** Python and functions
+** Python and FP issues
    
+   - (almost) everything is mutable
+   - no tail call optimization
+
    - what is a function in Python
    - decorators short intro
    - methods/classmethods/functions and behaviour
