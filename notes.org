@@ -4,6 +4,22 @@
   - threading sucks
   - it's the next big paradigm shift (and it's already happening)
 
+* Code
+
+
+#+begin_src python :session
+def foo(x):
+  if x>0:
+    return x+1
+  else:
+    return x-1
+
+foo(1)
+#+end_src
+
+#+RESULTS:
+: 2
+
 * Lambda calculus
    
   - full *model* of computation
