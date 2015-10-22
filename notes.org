@@ -1,4 +1,36 @@
-* Why FP
+#+AUTHOR: Andrea Crotti
+#+TITLE: Functional Programming
+#+OPTIONS: num:nil ^:nil
+#+REVEAL_TRANS: fade
+#+REVEAL_SPEED: fast
+#+EMAIL: andrea.crotti.0@gmail.com
+
+
+* What?
+  
+  - Full model of computation (Alonzo Church)
+  - /functions/ are *first class* citizens
+    - higher-order functions
+    - partial application
+    - currying
+  - Functions are pure
+    - immutable data: *no state*
+
+* Languages
+
+  - Haskell
+  - Clojure
+  - Scala
+  - F#
+  - Erlang
+  - Elixir
+  - Elm
+
+* No loops
+  
+  - looping with style
+
+* Why?
    
   - concurrency (multicore)
   - threading sucks
@@ -7,14 +39,14 @@
 * Code
 
 
-#+begin_src python :session
-def foo(x):
-  if x>0:
-    return x+1
-  else:
-    return x-1
+#+begin_src python
+  def foo(x):
+    if x>0:
+      return x+1
+    else:
+      return x-1
 
-foo(1)
+  foo(1)
 #+end_src
 
 #+RESULTS:
