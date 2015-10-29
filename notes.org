@@ -5,9 +5,26 @@
 #+REVEAL_SPEED: fast
 #+EMAIL: andrea.crotti.0@gmail.com
 
+* 
+  :PROPERTIES:
+  :reveal_background: ./images/should_learn.jpg
+  :reveal_background_trans: slide
+  :reveal_background_size: 800px
+  :END:
+
+* 
+  :PROPERTIES:
+  :reveal_background: ./images/what_if_functional.jpg
+  :reveal_background_trans: slide
+  :reveal_background_size: 800px
+  :END:
 
 * What?
   
+#+BEGIN_NOTES
+What are we going to talk about
+#+END_NOTES
+
   - Full model of computation (Alonzo Church)
   - /functions/ are *first class* citizens
     - higher-order functions
