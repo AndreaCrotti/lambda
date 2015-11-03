@@ -77,13 +77,15 @@ f(4) = 9
 
 * OOP is dead
 
-#+begin_quote
-"Object-oriented programming is eliminated entirely from the
-introductory curriculum, because it is both anti-modular and
-anti-parallel by its very nature, and hence unsuitable for a modern CS
-curriculum."
+[[./images/oop_rip.jpg]]
 
-- Robert Harper (professor at Carniage Mellon University)
+#+begin_quote
+Object-oriented programming is both anti-modular and
+anti-parallel by its very nature, and hence unsuitable for a modern CS
+curriculum.
+
+ Robert Harper (professor at Carniage Mellon University)
+
 #+end_quote
 
 * Simple example
