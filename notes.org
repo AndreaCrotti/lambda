@@ -137,22 +137,6 @@ curriculum."
   - it's the next big paradigm shift (and it's already happening)
   - write *better* code
 
-* Code
-
-
-#+begin_src python
-  def foo(x):
-    if x>0:
-      return x+1
-    else:
-      return x-1
-
-  foo(1)
-#+end_src
-
-#+RESULTS:
-: 2
-
 * Lambda calculus
 
   - full *model* of computation
@@ -175,7 +159,7 @@ curriculum."
   - composition over inheritance
   - parallel with all the states in the universe and how to test with that
 
-* Python and FP issues
+* Python and FP
 
   - (almost) everything is mutable
   - no tail call optimization
@@ -316,9 +300,17 @@ Or even better:
   - All Rich Hickey talks
 
 * Haskell
+
+  - pure
+  - lazy
+  - type inference
+
+[[./images/haskell.png]]
+
 ** Fibonacci
 
 #+begin_src haskell
+  fib :: Int -> Int
   fib 0 = 0
   fib 1 = 1
   fib n = fib (n-1) + fib (n-2)
