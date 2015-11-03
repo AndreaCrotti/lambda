@@ -71,6 +71,9 @@ f(4) = 9
 
 - *referential integrity*
 
+** Function domains
+
+[[./images/domain.png]]
 
 * OOP is dead
 
@@ -207,3 +210,7 @@ curriculum."
 
 * Quotes
   - "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." —Alan Perlis
+
+# Local Variables:
+# after-save-hook: (org-reveal-export-to-html)
+# End:
