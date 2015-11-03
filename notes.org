@@ -12,7 +12,7 @@
   :reveal_background_size: 800px
   :END:
 
-* 
+* What if
   :PROPERTIES:
   :reveal_background: ./images/what_if_functional.jpg
   :reveal_background_trans: slide
@@ -30,8 +30,37 @@ What are we going to talk about
     - higher-order functions
     - partial application
     - currying
+
   - Functions are pure
     - immutable data: *no state*
+    - encapsulated side effects
+
+  - lazy sequences
+
+* OOP is dead
+
+#+begin_quote
+"Object-oriented programming is eliminated entirely from the
+introductory curriculum, because it is both anti-modular and
+anti-parallel by its very nature, and hence unsuitable for a modern CS
+curriculum."
+
+Robert Harper (professor at Carniage Mellon University)
+#+end_quote
+
+* Simple example
+
+** FP
+
+#+begin_src python
+  def evens(collection):
+      return filter(lambda x: x % 2 ==0, collection)
+
+  def transform(func, collection):
+      return func(collection)
+
+  transform(evens, range(10))
+#+end_src
 
 * Languages
 
@@ -43,15 +72,12 @@ What are we going to talk about
   - Elixir
   - Elm
 
-* No loops
-  
-  - looping with style
-
 * Why?
    
   - concurrency (multicore)
   - threading sucks
   - it's the next big paradigm shift (and it's already happening)
+  - write *better* code
 
 * Code
 
@@ -119,6 +145,10 @@ What are we going to talk about
 
   - Okasaki for persistent data structures
   - All Rich Hickey talks
+
+* Haskell
+
+  - 
 
 * Quotes
   - "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." —Alan Perlis
