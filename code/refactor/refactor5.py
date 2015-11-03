@@ -53,6 +53,7 @@ def test_filter_output():
     desired = ['x1: to-match', 'x3: to-match..']
     assert filter_output(lines) == desired
 
+from hypothesis import funs
 
 if __name__ == '__main__':
     test_filter_output()

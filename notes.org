@@ -332,7 +332,9 @@ Or even better:
       update_to_database(res)
 #+end_src
 
-** Now test it!
+* FP and testing
+
+Testing becomes much *easier*
 
 #+begin_src python
 
@@ -345,6 +347,10 @@ Or even better:
       assert filter_output(lines) == desired
 
 #+end_src
+
+** Property based testing
+
+- originally 
 
 * Resources
 
@@ -390,8 +396,22 @@ Or better:
       in  smallerSorted ++ [x] ++ biggerSorted
 #+end_src
 
+
+* Conclusions
+
+1. Lock Free Concurrency.
+2. Brevity. (Modular Code)
+3. Lazy Evaluation.
+4. Composability.
+5. Parallelism.
+5. Improved ways of Testing.
+6. Referential Transparency.
+7 Lesser Bugs.
+
 * Quotes
   - "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." —Alan Perlis
+  - Functional programming is like describing your problem to a mathematician.
+  - Imperative programming is like giving instructions to an idiot.
 
 # Local Variables:
 # after-save-hook: (org-reveal-export-to-html)
