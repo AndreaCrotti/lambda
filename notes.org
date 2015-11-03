@@ -178,10 +178,10 @@ curriculum."
 * Python and FP
 
   - [ ] immutability
-  - [X] functions first class citizens
   - [ ] TCO (Tail Call Optimization)
   - [ ] side effects encapsulation
   - [ ] type system
+  - [X] functions first class citizens
 
 ** Are we screwed?
 
@@ -198,8 +198,29 @@ curriculum."
    
    - library with many nice functional programming functions
 
-#+begin_src
+#+begin_src python
+  import toolz
 
+  bills = {
+      "Alice": 0,
+      "Bob": 1,
+  }
+
+#+begin_src python
+  # BAD
+
+  def change_inline(bills):
+      for key, val in bills.items():
+          bills[key] = val + 1
+
+#+end_src
+
+#+begin_src python
+
+  # GOOD
+  def change_immutable(dic):
+      func = lambda val: val + 1
+      return toolz.valmap(func, dic)
 #+end_src
 
 ** Generators and higher order functions
