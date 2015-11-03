@@ -1,6 +1,6 @@
 #+AUTHOR: Andrea Crotti
 #+TITLE: Functional Programming
-#+OPTIONS: num:nil ^:nil
+#+OPTIONS: num:nil ^:nil tex:t
 #+REVEAL_TRANS: fade
 #+REVEAL_SPEED: fast
 #+EMAIL: andrea.crotti.0@gmail.com
@@ -20,7 +20,7 @@
   :END:
 
 * What?
-  
+
 #+BEGIN_NOTES
 What are we going to talk about
 #+END_NOTES
@@ -37,6 +37,41 @@ What are we going to talk about
 
   - lazy sequences
 
+** List of constraints
+
+ - No Assignments.
+ - No Varying Your Variables. (Immutable)
+ - No While/For Loops.
+ - No Control Over Order of Execution.
+ - No Side Effects.
+ - No Mutating or changing state.
+
+** What really
+
+#+begin_quote
+
+   Functional Programming is so called because a program consists entirely of functions.
+
+   - John Hughes, Why Functional Programming Matters
+
+#+end_quote
+
+* What is a function
+
+\begin{equation}
+f(x) = 2 x + 1
+\end{equation}
+
+- output depends *only* on the input
+- no side effect
+
+\begin{equation}
+f(4) = 9
+\end{equation}
+
+- *referential integrity*
+
+
 * OOP is dead
 
 #+begin_quote
@@ -45,10 +80,30 @@ introductory curriculum, because it is both anti-modular and
 anti-parallel by its very nature, and hence unsuitable for a modern CS
 curriculum."
 
-Robert Harper (professor at Carniage Mellon University)
+- Robert Harper (professor at Carniage Mellon University)
 #+end_quote
 
 * Simple example
+
+** OOP
+
+#+begin_src python
+
+  class Transformer(object):
+      def __init__(self, collection):
+          self.data = collection
+
+      def func(self, collection):
+          return filter(lambda x: x % 2 ==0, collection)
+
+      def transform(self):
+          self.data = self.func(self.data)
+
+  tr = Transformer(range(10))
+  tr.transform()
+  tr.data
+
+#+end_src
 
 ** FP
 
@@ -73,7 +128,7 @@ Robert Harper (professor at Carniage Mellon University)
   - Elm
 
 * Why?
-   
+
   - concurrency (multicore)
   - threading sucks
   - it's the next big paradigm shift (and it's already happening)
@@ -96,7 +151,7 @@ Robert Harper (professor at Carniage Mellon University)
 : 2
 
 * Lambda calculus
-   
+
   - full *model* of computation
   - currying
   - higher order function
@@ -108,7 +163,7 @@ Robert Harper (professor at Carniage Mellon University)
   - what is a side effect
   - why is it bad
   - how to encapsulate them properly
-  - demo about refactoring using 
+  - demo about refactoring using
 
 * Design principles
 
@@ -118,7 +173,7 @@ Robert Harper (professor at Carniage Mellon University)
   - parallel with all the states in the universe and how to test with that
 
 * Python and FP issues
-   
+
   - (almost) everything is mutable
   - no tail call optimization
 
@@ -127,7 +182,7 @@ Robert Harper (professor at Carniage Mellon University)
   - methods/classmethods/functions and behaviour
 
 * Toolz
-   
+
   - Show some nice examples such as:
     toolz.itemmap(reversed, dic)
 
@@ -148,7 +203,7 @@ Robert Harper (professor at Carniage Mellon University)
 
 * Haskell
 
-  - 
+  -
 
 * Quotes
   - "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." —Alan Perlis
