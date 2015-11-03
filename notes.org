@@ -12,7 +12,7 @@
   :reveal_background_size: 800px
   :END:
 
-* What if
+* 
   :PROPERTIES:
   :reveal_background: ./images/what_if_functional.jpg
   :reveal_background_trans: slide
@@ -177,22 +177,37 @@ curriculum."
 
 * Python and FP
 
-  - (almost) everything is mutable
-  - no tail call optimization
+  - [ ] immutability
+  - [X] functions first class citizens
+  - [ ] TCO (Tail Call Optimization)
+  - [ ] side effects encapsulation
+  - [ ] type system
 
-  - what is a function in Python
-  - decorators short intro
-  - methods/classmethods/functions and behaviour
+** Are we screwed?
 
-* Toolz
+** Itertools
 
-  - Show some nice examples such as:
-    toolz.itemmap(reversed, dic)
+   - standard library module for infinite streams
+   - *use it*
 
-* Generators and higher order functions
+#+begin_src python
 
-  - infinite streams
-  - relationship between streams and pure functions
+#+end_src
+
+** Toolz
+   
+   - library with many nice functional programming functions
+
+#+begin_src
+
+#+end_src
+
+** Generators and higher order functions
+
+   - infinite streams
+   - relationship between streams and pure functions
+
+** Pypersistent?
 
 * Testing
 
