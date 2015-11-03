@@ -278,7 +278,7 @@ Or even better:
 
 #+begin_src python
 
-  def filter_output_shorter(out):
+  def filter_output(out):
       return filter(lambda l: 'to-match' in l, out)
 
 #+end_src
@@ -316,8 +316,33 @@ Or even better:
   - All Rich Hickey talks
 
 * Haskell
+** Fibonacci
 
-  -
+#+begin_src haskell
+  fib 0 = 0
+  fib 1 = 1
+  fib n = fib (n-1) + fib (n-2)
+#+end_src
+
+Or better:
+
+#+begin_src haskell
+  fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
+#+end_src
+
+#+RESULTS:
+
+** Quicksort
+
+#+begin_src haskell
+  quicksort :: (Ord a) => [a] -> [a]  
+  quicksort [] = []  
+  quicksort (x:xs) =   
+      let smallerSorted = quicksort [a | a <- xs, a <= x]  
+          biggerSorted = quicksort [a | a <- xs, a > x]   
+
+      in  smallerSorted ++ [x] ++ biggerSorted
+#+end_src
 
 * Quotes
   - "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." —Alan Perlis
