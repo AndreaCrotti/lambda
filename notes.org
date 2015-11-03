@@ -152,12 +152,28 @@ curriculum."
   - how to encapsulate them properly
   - demo about refactoring using
 
-* Design principles
+* Immutability
+  
+  [[./images/too_many_objects.png]]
 
-  - OOP issues
-  - designing without classes
-  - composition over inheritance
-  - parallel with all the states in the universe and how to test with that
+** Persistent data structures 1/2
+
+#+begin_src haskell
+
+  xs = [0, 1, 2]
+  ys = [3, 4, 5]
+
+#+end_src
+
+[[./images/persistent1.png]]
+
+** Persistent data structures 2/2
+
+#+begin_src haskell
+  zs = xs ++ ys
+#+end_src
+
+[[./images/persistent2.png]]
 
 * Python and FP
 
@@ -303,6 +319,8 @@ Or even better:
 
   - pure
   - lazy
+  - pattern matching
+  - algebraic data types
   - type inference
 
 [[./images/haskell.png]]
