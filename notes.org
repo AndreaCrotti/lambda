@@ -207,19 +207,19 @@ curriculum.
       "Alice": 0,
       "Bob": 1,
   }
-
-#+begin_src python
-  # BAD
-
-  def change_inline(bills):
-      for key, val in bills.items():
-          bills[key] = val + 1
-
 #+end_src
 
-#+begin_src python
+BAD:
 
-  # GOOD
+#+begin_src python
+    def change_inline(bills):
+        for key, val in bills.items():
+            bills[key] = val + 1
+#+end_src
+
+GOOD: 
+
+#+begin_src python
   def change_immutable(dic):
       func = lambda val: val + 1
       return toolz.valmap(func, dic)
@@ -352,7 +352,7 @@ Testing becomes much *easier*
 
 ** Property based testing
 
-- originally 
+- originally from Haskell
 
 * Resources
 
