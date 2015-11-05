@@ -155,7 +155,7 @@ curriculum.
   - demo about refactoring using
 
 * Immutability
-  
+
   [[./images/too_many_objects.png]]
 
 ** Persistent data structures 1/2
@@ -185,7 +185,13 @@ curriculum.
   - [ ] type system
   - [X] functions first class citizens
 
-** Are we screwed?
+* Python and functions
+
+** Methods, classmethods, staticmethods, functions, lambda??
+
+[[./images/confused.gif]]
+
+* Are we screwed?
 
 ** Itertools
 
@@ -197,7 +203,7 @@ curriculum.
 #+end_src
 
 ** Toolz
-   
+
    - library with many nice functional programming functions
 
 #+begin_src python
@@ -217,7 +223,7 @@ BAD:
             bills[key] = val + 1
 #+end_src
 
-GOOD: 
+GOOD:
 
 #+begin_src python
   def change_immutable(dic):
@@ -389,11 +395,11 @@ Or better:
 ** Quicksort
 
 #+begin_src haskell
-  quicksort :: (Ord a) => [a] -> [a]  
-  quicksort [] = []  
-  quicksort (x:xs) =   
-      let smallerSorted = quicksort [a | a <- xs, a <= x]  
-          biggerSorted = quicksort [a | a <- xs, a > x]   
+  quicksort :: (Ord a) => [a] -> [a]
+  quicksort [] = []
+  quicksort (x:xs) =
+      let smallerSorted = quicksort [a | a <- xs, a <= x]
+          biggerSorted = quicksort [a | a <- xs, a > x]
 
       in  smallerSorted ++ [x] ++ biggerSorted
 #+end_src
@@ -414,6 +420,7 @@ Or better:
   - "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." —Alan Perlis
   - Functional programming is like describing your problem to a mathematician.
   - Imperative programming is like giving instructions to an idiot.
+  - using Python for FP it's like looking at a beautiful view through a dirty window
 
 # Local Variables:
 # after-save-hook: (org-reveal-export-to-html)
