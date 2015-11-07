@@ -1,6 +1,6 @@
 #+AUTHOR: Andrea Crotti
 #+TITLE: Functional Programming
-#+OPTIONS: num:nil ^:nil tex:t toc:nil
+#+OPTIONS: num:nil ^:nil tex:t toc:nil reveal_progress:t reveal_control:t reveal_overview:t
 #+REVEAL_TRANS: fade
 #+REVEAL_SPEED: fast
 #+EMAIL: andrea.crotti.0@gmail.com
@@ -154,6 +154,11 @@ that depends on it.
 
 The output of f depends only on the input we pass in, and this function
 has no side effects.
+
+The other important property of a function is referential transparency,
+which means that for a function defined as such you can always replace
+the function call by its result, and the end result of the program
+will still be exactly the same.
 #+END_NOTES
 
 \begin{equation}
@@ -161,20 +166,47 @@ f(x) = 2 x + 1
 \end{equation}
 
 - output depends *only* on the input
-- no side effect
+- no side effect -> *pure*
 
 \begin{equation}
 f(4) = 9
 \end{equation}
 
-- *referential integrity*
+- *referential transparency*:
+  a function call can be always replaced by its result
 
-** Function domains
+** Domains
+
+#+BEGIN_NOTES
+
+Another important thing to consider is that every pure function
+is that it has a domain and a codomain, so it always transforms
+values of type X to values of type Y.
+
+Not all FP programming languages are statically typed but types
+are always present anyway and you should always keep them in mind.
+
+#+END_NOTES
 
 [[./images/domain.png]]
 
 * Haskell
 
+
+#+BEGIN_NOTES
+The original intention was to talk about Python but in reality
+my first real encounter with FP was with Haskell and that's probably
+the main reason why I got interested in it.
+
+Haskell is a relatively old language (same age as Python) but it has
+been for most of its history a niche research language, that people
+used to write papers with.
+
+It's probably until now the most "complete" and pure functional programming
+language out there, and in some ways it's just incredibly beautiful.
+#+END_NOTES
+
+  - First version in 1990
   - pure
   - lazy
   - pattern matching
@@ -185,6 +217,22 @@ f(4) = 9
 
 ** Fibonacci
 
+#+BEGIN_NOTES
+Let's just see a couple of examples of haskell code.
+First of all we can define a fibonacci function that computes
+the nth fibonacci number, and does it recursively.
+
+This first definition is incredibly simple and is just
+the same as the mathematical definition.
+First we define the type above, which means that fib is a function
+that takes an int and returns another int.
+
+And then we define top-down the output of the function itself,
+first with two specific values (using pattern matching) and then
+in the generic case.
+#+END_NOTES
+
+
 #+begin_src haskell
   fib :: Int -> Int
   fib 0 = 0
@@ -192,14 +240,35 @@ f(4) = 9
   fib n = fib (n-1) + fib (n-2)
 #+end_src
 
+
+#+BEGIN_NOTES
+The second function is even more interesting since it condense in two lines
+the essence of all the beauty.
+
+Now instead of defining fibs recursively straight away we instead define
+the whole fibonacci sequence, recursively as an infinite list of ints!
+The way this works is that we use the : to create a list and concatenate
+0 and 1 to the result of zipWith (+) fibs (tail fibs).
+#+END_NOTES
+
 Or better:
 
 #+begin_src haskell
-  fibs:: Num a => [a]
+  -- zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]
+  fibs:: [Int]
   fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
 
   -- get the 10th fibonacci number from
-  fib_of_10 = fibs !! 10
+  fib :: Int -> Int
+  fib n = fibs !! n
+#+end_src
+
+
+#+begin_src python
+  first_fibs = [0, 1, 2, 3, 5]
+
+  fibs = [0, 1] + map(sum, zip(first_fibs, first_fibs[1:]))
+  # Out[5]: [0, 1, 1, 2, 3, 5, 8]
 #+end_src
 
 #+RESULTS:
