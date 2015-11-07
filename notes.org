@@ -26,6 +26,8 @@ What are we going to talk about
 #+END_NOTES
 
   - Full model of computation (Alonzo Church)
+    based on *lambda calculus*
+
   - /functions/ are *first class* citizens
     - higher-order functions
     - partial application
@@ -36,6 +38,39 @@ What are we going to talk about
     - encapsulated side effects
 
   - lazy sequences
+
+** Lambda calculus primer
+   
+   Formal system for expressing computation based on
+   - function abstraction
+   - variable binding and substitution
+
+Church numerals (s = suc):
+
+\begin{equation}
+0 \equiv \lambda sz. z
+\end{equation}
+
+\begin{equation}
+1 \equiv \lambda sz. s(z)
+\end{equation}
+
+\begin{equation}
+2 \equiv \lambda sz. s(s(z))
+\end{equation}
+
+*Successor*
+
+\begin{equation}
+S \equiv \lambda wyx. y(wyx)
+\end{equation}
+\begin{equation}
+S(0) \equiv (\lambda wyx.y(wyx))(\lambda sz.z) = 
+\end{equation}
+
+\begin{equation}
+\lambda yx.y ((\lambda sz. z) yx) = \lambda yx. y(x) \equiv 1
+\end{equation}
 
 ** List of constraints
 
