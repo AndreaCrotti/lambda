@@ -59,7 +59,7 @@ immutability.
 
   - lazy sequences
 
-** List of constraints
+** You shall NOT have
 
 #+BEGIN_NOTES
 There is another way to define functional programming, which is in term of the constraints that are added.
@@ -69,8 +69,6 @@ a new set of constraints, which overall make our lives a lot better.
 As OOP took away from use the GOTO statement, these are the things that you shall not do in functional
 programming.
 #+END_NOTES
-
-You shall *NOT* have:
 
  - Assignments
  - Mutable data structures
@@ -161,16 +159,12 @@ the function call by its result, and the end result of the program
 will still be exactly the same.
 #+END_NOTES
 
-\begin{equation}
-f(x) = 2 x + 1
-\end{equation}
+$f(x) = 2 x + 1$
 
 - output depends *only* on the input
 - no side effect -> *pure*
 
-\begin{equation}
-f(4) = 9
-\end{equation}
+$f(4) = 9$
 
 - *referential transparency*:
   a function call can be always replaced by its result
@@ -577,31 +571,26 @@ Testing becomes much *easier*
 
 Church numerals (s = suc):
 
-\begin{equation}
-0 \equiv \lambda sz. z
-\end{equation}
+$0 \equiv \lambda sz. z$
 
-\begin{equation}
-1 \equiv \lambda sz. s(z)
-\end{equation}
+$1 \equiv \lambda sz. s(z)$
 
-\begin{equation}
-2 \equiv \lambda sz. s(s(z))
-\end{equation}
+$2 \equiv \lambda sz. s(s(z))$
 
-*Successor*
+*** Lambda calculus 2
+ *Successor*
 
-\begin{equation}
-S \equiv \lambda wyx. y(wyx)
-\end{equation}
-\begin{equation}
-S(0) \equiv (\lambda wyx.y(wyx))(\lambda sz.z) = 
-\end{equation}
+ \begin{equation}
+ S \equiv \lambda wyx. y(wyx)
+ \end{equation}
+ \begin{equation}
+ S(0) \equiv (\lambda wyx.y(wyx))(\lambda sz.z) = 
+ \end{equation}
 
-\begin{equation}
-\lambda yx.y ((\lambda sz. z) yx) = \lambda yx. y(x) \equiv 1
-\end{equation}
+ \begin{equation}
+ \lambda yx.y ((\lambda sz. z) yx) = \lambda yx. y(x) \equiv 1
+ \end{equation}
 
-# Local Variables:
-# after-save-hook: (org-reveal-export-to-html)
-# End:
+ # Local Variables:
+ # after-save-hook: (org-reveal-export-to-html)
+ # End:
