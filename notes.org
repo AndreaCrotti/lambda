@@ -1,9 +1,10 @@
 #+AUTHOR: Andrea Crotti
 #+TITLE: Functional Programming
-#+OPTIONS: num:nil ^:nil tex:t
+#+OPTIONS: num:nil ^:nil tex:t toc:nil
 #+REVEAL_TRANS: fade
 #+REVEAL_SPEED: fast
 #+EMAIL: andrea.crotti.0@gmail.com
+#+TOC: listings
 
 * 
   :PROPERTIES:
@@ -38,39 +39,6 @@ What are we going to talk about
     - encapsulated side effects
 
   - lazy sequences
-
-** Lambda calculus primer
-   
-   Formal system for expressing computation based on
-   - function abstraction
-   - variable binding and substitution
-
-Church numerals (s = suc):
-
-\begin{equation}
-0 \equiv \lambda sz. z
-\end{equation}
-
-\begin{equation}
-1 \equiv \lambda sz. s(z)
-\end{equation}
-
-\begin{equation}
-2 \equiv \lambda sz. s(s(z))
-\end{equation}
-
-*Successor*
-
-\begin{equation}
-S \equiv \lambda wyx. y(wyx)
-\end{equation}
-\begin{equation}
-S(0) \equiv (\lambda wyx.y(wyx))(\lambda sz.z) = 
-\end{equation}
-
-\begin{equation}
-\lambda yx.y ((\lambda sz. z) yx) = \lambda yx. y(x) \equiv 1
-\end{equation}
 
 ** List of constraints
 
@@ -173,6 +141,45 @@ curriculum.
   - threading sucks
   - it's the next big paradigm shift (and it's already happening)
   - write *better* code
+
+* Haskell
+
+  - pure
+  - lazy
+  - pattern matching
+  - algebraic data types
+  - type inference
+
+[[./images/haskell.png]]
+
+** Fibonacci
+
+#+begin_src haskell
+  fib :: Int -> Int
+  fib 0 = 0
+  fib 1 = 1
+  fib n = fib (n-1) + fib (n-2)
+#+end_src
+
+Or better:
+
+#+begin_src haskell
+  fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
+#+end_src
+
+#+RESULTS:
+
+** Quicksort
+
+#+begin_src haskell
+  quicksort :: (Ord a) => [a] -> [a]
+  quicksort [] = []
+  quicksort (x:xs) =
+      let smallerSorted = quicksort [a | a <- xs, a <= x]
+          biggerSorted = quicksort [a | a <- xs, a > x]
+
+      in  smallerSorted ++ [x] ++ biggerSorted
+#+end_src
 
 * Lambda calculus
 
@@ -400,45 +407,6 @@ Testing becomes much *easier*
   - Okasaki for persistent data structures
   - All Rich Hickey talks
 
-* Haskell
-
-  - pure
-  - lazy
-  - pattern matching
-  - algebraic data types
-  - type inference
-
-[[./images/haskell.png]]
-
-** Fibonacci
-
-#+begin_src haskell
-  fib :: Int -> Int
-  fib 0 = 0
-  fib 1 = 1
-  fib n = fib (n-1) + fib (n-2)
-#+end_src
-
-Or better:
-
-#+begin_src haskell
-  fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
-#+end_src
-
-#+RESULTS:
-
-** Quicksort
-
-#+begin_src haskell
-  quicksort :: (Ord a) => [a] -> [a]
-  quicksort [] = []
-  quicksort (x:xs) =
-      let smallerSorted = quicksort [a | a <- xs, a <= x]
-          biggerSorted = quicksort [a | a <- xs, a > x]
-
-      in  smallerSorted ++ [x] ++ biggerSorted
-#+end_src
-
 
 * Conclusions
 
@@ -456,6 +424,41 @@ Or better:
   - Functional programming is like describing your problem to a mathematician.
   - Imperative programming is like giving instructions to an idiot.
   - using Python for FP it's like looking at a beautiful view through a dirty window
+
+* Extra material
+
+** Lambda calculus primer
+   
+   Formal system for expressing computation based on
+   - function abstraction
+   - variable binding and substitution
+
+Church numerals (s = suc):
+
+\begin{equation}
+0 \equiv \lambda sz. z
+\end{equation}
+
+\begin{equation}
+1 \equiv \lambda sz. s(z)
+\end{equation}
+
+\begin{equation}
+2 \equiv \lambda sz. s(s(z))
+\end{equation}
+
+*Successor*
+
+\begin{equation}
+S \equiv \lambda wyx. y(wyx)
+\end{equation}
+\begin{equation}
+S(0) \equiv (\lambda wyx.y(wyx))(\lambda sz.z) = 
+\end{equation}
+
+\begin{equation}
+\lambda yx.y ((\lambda sz. z) yx) = \lambda yx. y(x) \equiv 1
+\end{equation}
 
 # Local Variables:
 # after-save-hook: (org-reveal-export-to-html)
