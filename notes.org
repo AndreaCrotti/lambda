@@ -263,6 +263,7 @@ Or better:
   fib n = fibs !! n
 #+end_src
 
+Which in Python is roughly:
 
 #+begin_src python
   first_fibs = [0, 1, 2, 3, 5]
