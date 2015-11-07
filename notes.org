@@ -13,21 +13,40 @@
   :reveal_background_size: 800px
   :END:
 
-* 
-  :PROPERTIES:
-  :reveal_background: ./images/what_if_functional.jpg
-  :reveal_background_trans: slide
-  :reveal_background_size: 800px
-  :END:
+#+BEGIN_NOTES
+In the last few years there has been a lot of hype about functional programming.
+
+Many languages like Clojure or Scala are growing extremely fast in popularity and many big companies
+are moving more and more to functional programming.
+
+And this affects anyone, if you look at some job postings it's almost certain that they will contain
+a functional programming exposure or knowledge (even the Python engineer job post here at Skimlinks does).
+#+END_NOTES
+
 
 * What?
 
 #+BEGIN_NOTES
-What are we going to talk about
+So let's start to talk about what is functional programming which will help understanding why
+it's becoming so important in the software world.
+Functional programming is a full model of computation based on lambda calculus.
+This means that it's a model that can represent anything that is computable, in the same
+way as a turing maching can (or any language that is usually defined Turing Complete).
+
+We might see in more detail an example about Lambda calculus later on if we have time.
+
+In functional programming are the building block and always considered first class citizens.
+You also need to be able to define higher order functions, and perform partial appliaction and currying.
+
+Functions also need to be pure, which means that there is no external state that affects them,
+and the data has to be immutable.
+Any side effect should be then in fact encapsulated.
+
+Another very common building block of FP are lazy sequences, which work extremely well with
+immutability.
 #+END_NOTES
 
-  - Full model of computation (Alonzo Church)
-    based on *lambda calculus*
+  - Full model of computation based on *lambda calculus* (Alonzo Church)
 
   - /functions/ are *first class* citizens
     - higher-order functions
@@ -42,14 +61,26 @@ What are we going to talk about
 
 ** List of constraints
 
- - No Assignments.
- - No Varying Your Variables. (Immutable)
- - No While/For Loops.
- - No Control Over Order of Execution.
- - No Side Effects.
- - No Mutating or changing state.
+#+BEGIN_NOTES
+There is another way to define functional programming, which is in term of the constraints that are added.
+There is a very interesting talk from Bob Martin where he points out that every paradigm shift brings
+a new set of constraints, which overall make our lives a lot better.
 
-** What really
+As OOP took away from use the GOTO statement, these are the things that you shall not do in functional
+programming.
+#+END_NOTES
+
+You shall *NOT* have:
+
+ - Assignments
+ - Mutable data structures
+ - While/For Loops
+ - Control Over Order of Execution
+ - Side Effects
+
+[[./images/wtf.gif]]
+
+** What simplified
 
 #+begin_quote
 
@@ -59,7 +90,71 @@ What are we going to talk about
 
 #+end_quote
 
+* Why?
+
+#+BEGIN_NOTES
+So after we briefly introduced what is functional programming we are going
+to say why it is becoming so important and prevalent.
+
+Functional programming is even older than OOP and for many years it was
+considered a niche environment, but probably the biggest change
+that caused everyone to jump on the FP train is the multicore revolution.
+
+When even your watch has multiple cores being able to write safe concurrent
+code becomes very important, and the traditional ways (using threads, locks,
+and so on and so forth) are just terrible and will ruin your life.
+
+On top of that programming has become more and more complex, and OOP
+programs just don't compose well.
+
+The code you will write if you learn FP will be also definitively better,
+more testable and more reusable then the one you are used to write.
+
+#+END_NOTES
+
+# [[./images/why.gif]]
+
+  - threading sucks
+  - OOP does not compose
+  - write *better* code
+  - it's the next big paradigm shift (and it's already happening)
+
+# TODO: show an example about how hard is to write concurrent code?
+
+** OOP is dead
+
+
+#+BEGIN_NOTES
+About OOP this is a quote from a professor of the Carniage Mellon
+University which expresses this view quite clearly.
+
+OOP is still the taught in all universisties but luckily some
+of them are starting to realise that it's not what we need anymore.
+#+END_NOTES
+
+ [[./images/oop_rip.jpg]]
+
+ #+begin_quote
+ Object-oriented programming is both anti-modular and
+ anti-parallel by its very nature, and hence unsuitable for a modern CS
+ curriculum.
+
+  Robert Harper (professor at Carniage Mellon University)
+
+ #+end_quote
+
 * What is a function
+
+#+BEGIN_NOTES
+So since we said that FP is based on functions, let's have a look again at what
+functions are in their mathematical terms.
+
+From this example the function f takes an input x and return a value
+that depends on it.
+
+The output of f depends only on the input we pass in, and this function
+has no side effects.
+#+END_NOTES
 
 \begin{equation}
 f(x) = 2 x + 1
@@ -78,18 +173,57 @@ f(4) = 9
 
 [[./images/domain.png]]
 
-* OOP is dead
+* Haskell
 
-[[./images/oop_rip.jpg]]
+  - pure
+  - lazy
+  - pattern matching
+  - algebraic data types
+  - type inference
 
-#+begin_quote
-Object-oriented programming is both anti-modular and
-anti-parallel by its very nature, and hence unsuitable for a modern CS
-curriculum.
+[[./images/haskell.png]]
 
- Robert Harper (professor at Carniage Mellon University)
+** Fibonacci
 
-#+end_quote
+#+begin_src haskell
+  fib :: Int -> Int
+  fib 0 = 0
+  fib 1 = 1
+  fib n = fib (n-1) + fib (n-2)
+#+end_src
+
+Or better:
+
+#+begin_src haskell
+  fibs:: Num a => [a]
+  fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
+
+  -- get the 10th fibonacci number from
+  fib_of_10 = fibs !! 10
+#+end_src
+
+#+RESULTS:
+
+** Quicksort
+
+#+begin_src haskell
+  quicksort :: (Ord a) => [a] -> [a]
+  quicksort [] = []
+  quicksort (x:xs) =
+      let smallerSorted = quicksort [a | a <- xs, a <= x]
+          biggerSorted = quicksort [a | a <- xs, a > x]
+
+      in  smallerSorted ++ [x] ++ biggerSorted
+#+end_src
+
+* Other languages
+
+  - Clojure
+  - Scala
+  - F#
+  - Erlang
+  - Elixir
+  - Elm
 
 * Simple example
 
@@ -124,70 +258,6 @@ curriculum.
 
   transform(evens, range(10))
 #+end_src
-
-* Languages
-
-  - Haskell
-  - Clojure
-  - Scala
-  - F#
-  - Erlang
-  - Elixir
-  - Elm
-
-* Why?
-
-  - concurrency (multicore)
-  - threading sucks
-  - it's the next big paradigm shift (and it's already happening)
-  - write *better* code
-
-* Haskell
-
-  - pure
-  - lazy
-  - pattern matching
-  - algebraic data types
-  - type inference
-
-[[./images/haskell.png]]
-
-** Fibonacci
-
-#+begin_src haskell
-  fib :: Int -> Int
-  fib 0 = 0
-  fib 1 = 1
-  fib n = fib (n-1) + fib (n-2)
-#+end_src
-
-Or better:
-
-#+begin_src haskell
-  fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
-#+end_src
-
-#+RESULTS:
-
-** Quicksort
-
-#+begin_src haskell
-  quicksort :: (Ord a) => [a] -> [a]
-  quicksort [] = []
-  quicksort (x:xs) =
-      let smallerSorted = quicksort [a | a <- xs, a <= x]
-          biggerSorted = quicksort [a | a <- xs, a > x]
-
-      in  smallerSorted ++ [x] ++ biggerSorted
-#+end_src
-
-* Lambda calculus
-
-  - full *model* of computation
-  - currying
-  - higher order function
-  - map/reduce/whatever
-  - Church numerals introduction
 
 * Side effects and immutability
 
@@ -406,6 +476,7 @@ Testing becomes much *easier*
 
   - Okasaki for persistent data structures
   - All Rich Hickey talks
+  - Why functional programming matters
 
 
 * Conclusions
@@ -423,6 +494,7 @@ Testing becomes much *easier*
   - "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." —Alan Perlis
   - Functional programming is like describing your problem to a mathematician.
   - Imperative programming is like giving instructions to an idiot.
+  - OOP cannot save us from the Cloud Monster anymore.
   - using Python for FP it's like looking at a beautiful view through a dirty window
 
 * Extra material
