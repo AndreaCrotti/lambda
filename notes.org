@@ -46,14 +46,14 @@ Another very common building block of FP are lazy sequences, which work extremel
 immutability.
 #+END_NOTES
 
-  - Full model of computation based on *lambda calculus* (Alonzo Church)
+  - Programming paradigm based on *lambda calculus* (Alonzo Church)
 
   - /functions/ are *first class* citizens
     - higher-order functions
     - partial application
     - currying
 
-  - Functions are pure
+  - *Pure* functions
     - immutable data: *no state*
     - encapsulated side effects
 
@@ -78,17 +78,10 @@ programming.
 
 [[./images/wtf.gif]]
 
-** What simplified
-
-#+begin_quote
-
-   Functional Programming is so called because a program consists entirely of functions.
-
-   - John Hughes, Why Functional Programming Matters
-
-#+end_quote
 
 * Why?
+
+** Give me a reason
 
 #+BEGIN_NOTES
 So after we briefly introduced what is functional programming we are going
@@ -116,6 +109,7 @@ more testable and more reusable then the one you are used to write.
   - OOP does not compose
   - write *better* code
   - it's the next big paradigm shift (and it's already happening)
+  - you are already doing it
 
 # TODO: show an example about how hard is to write concurrent code?
 
@@ -942,6 +936,16 @@ Imperative programming is like giving instructions to an idiot. - Arcus #scheme
 #+BEGIN_QUOTE
   OOP cannot save us from the Cloud Monster anymore. - Ju Gonçalves
 #+END_QUOTE
+
+** Functions
+
+#+begin_quote
+
+   Functional Programming is so called because a program consists entirely of functions.
+
+   - John Hughes, Why Functional Programming Matters
+
+#+end_quote
 
 ** Python FP
 
