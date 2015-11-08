@@ -461,7 +461,7 @@ Here we first define the double function as a partial application
 and then apply that to the given list.
 #+END_NOTES
 
-Standard for loop:
+ Standard for loop:
 
 #+begin_src python :tangle python_samples.py
   lis = [1, 2, 3, 4]
@@ -591,9 +591,14 @@ GOOD:
       return toolz.valmap(inc, dic)
 #+end_src
 
-** Other dictionary functions
+** Other toolz functions
 
-[[./images/dicttoolz.png]]
+|----------------+------------+-----------+------------|
+| assoc          | dissoc     | itemmap   | itemfilter |
+| merge          | merge_with | valfilter | valmap     |
+| partition      | groupby    | juxt      | take       |
+| sliding_window | compose    | diff      | drop       |
+| interspose     | interleave | ...       |            |
 
 * Simple example
 
