@@ -461,7 +461,7 @@ Here we first define the double function as a partial application
 and then apply that to the given list.
 #+END_NOTES
 
-- Standard for loop:
+Standard for loop:
 
 #+begin_src python :tangle python_samples.py
   lis = [1, 2, 3, 4]
@@ -472,13 +472,13 @@ and then apply that to the given list.
 
 #+end_src
 
-- List comprehension:
+List comprehension:
 
 #+begin_src python :tangle python_samples.py
   [l * 2 for l in lis]
 #+end_src
 
-- Look mum no loop:
+Look mum no loop:
 
 #+begin_src python :tangle python_samples.py
   import operator
@@ -495,7 +495,7 @@ to a single value.
 This is the loopy version and below the same operation done using reduce.
 #+END_NOTES
 
-- Loopy:
+Loopy:
 
 #+begin_src python :tangle python_samples.py
   lis = [1, 2, 3, 4]
@@ -506,7 +506,7 @@ This is the loopy version and below the same operation done using reduce.
 
 #+end_src
 
-- Not loopy:
+Not loopy:
 
 #+begin_src python :tangle python_samples.py
   val = functools.reduce(operator.add, lis)
@@ -629,15 +629,12 @@ GOOD:
   transform(evens, range(10))
 #+end_src
 
-* Testing
+* Refactor journey
 
-  - testing pure functions
-  - show the refactor example from the crappy solution to testing with hypothesis
+** The mess
 
-** Refactor journey
-
-#+begin_src python
-  import subprocess, MySQLdb
+#+begin_src python :tangle python_samples.py
+  import subprocess, sqlite3
 
   def long_crappy_function():
       ## launching a shell command
@@ -648,14 +645,13 @@ GOOD:
       ## filtering the output of a shell command
       out, err = p.communicate()
       res = []
-      for line in out:
+      for line in out.decode('utf-8').splitlines():
           if 'to-match' in line:
               res.append(line)
 
       ## updating the results to database
-      dbc = MySQLdb.connect(host='host', user='user',
-                            passwd='passwd', port='port')
-      cursor = dbc.cursor(MySQLdb.cursors.DictCursor)
+      dbc = sqlite3.connect("lambda.db")
+      cursor = dbc.cursor()
 
       for r in res:
          cursor.execute('INSERT INTO table VALUES (%s)' % r)
@@ -665,12 +661,12 @@ GOOD:
 ** Extract database update
 
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
 
   def update_to_database(res):
       ## updating the results to database
-      dbc = MySQLdb.connect(host='host', user='user', passwd='passwd', port='port')
-      cursor = dbc.cursor(MySQLdb.cursors.DictCursor)
+      dbc = sqlite3.connect("lambda.db")
+      cursor = dbc.cursor()
 
       for r in res:
          cursor.execute('INSERT INTO table VALUES (%s)' % r)
@@ -679,7 +675,7 @@ GOOD:
 ** Extract 'ls' execution
 
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
 
   def run_ls():
       ## launching a shell command
@@ -689,14 +685,13 @@ GOOD:
                            stderr=subprocess.PIPE)
       ## filtering the output of a shell command
       out, err = p.communicate()
-
-      return out
+      return out.decode('utf-8').splitlines()
 
 #+end_src
 
 ** Extract filter output
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
 
 
   def filter_output(out):
@@ -711,7 +706,7 @@ GOOD:
 
 Or even better:
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
 
   def filter_output(out):
       return filter(lambda l: 'to-match' in l, out)
@@ -722,7 +717,7 @@ Or even better:
 ** And finally
 
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
   def write_filtered_ls_to_db():
       """Do a bit of everything
       """
@@ -731,54 +726,56 @@ Or even better:
       update_to_database(res)
 #+end_src
 
-* FP and testing
+** Now test this
 
-Testing becomes much *easier*
+ Testing becomes much *easier*
 
-#+begin_src python
+ #+begin_src python :tangle python_samples.py
 
-  def filter_output(out):
-      return filter(lambda l: 'to-match' in l, out)
+   def filter_output(out):
+       return filter(lambda l: 'to-match' in l, out)
 
-  def test_filter_output():
-      lines = ['x1: to-match', 'x2', 'x3: to-match..']
-      desired = ['x1: to-match', 'x3: to-match..']
-      assert filter_output(lines) == desired
+   def test_filter_output():
+       lines = ['x1: to-match', 'x2', 'x3: to-match..']
+       desired = ['x1: to-match', 'x3: to-match..']
+       assert filter_output(lines) == desired
 
-#+end_src
+ #+end_src
 
 * Conclusions
 
-1. Lock Free Concurrency.
-2. Brevity. (Modular Code)
-3. Lazy Evaluation.
-4. Composability.
-5. Parallelism.
-6. Improved ways of Testing.
-7. Referential Transparency.
-8. Lesser Bugs.
+** Improved
 
-* Random tips
+ 1. Lock Free Concurrency.
+ 2. Brevity. (Modular Code)
+ 3. Lazy Evaluation.
+ 4. Composability.
+ 5. Parallelism.
+ 6. Improved ways of Testing.
+ 7. Referential Transparency.
+ 8. Lesser Bugs.
+
+** Random tips
   
-  - default to *immutability*
-  - think in terms of transformations, not loops
-  - compose your programs bottom-up
-  - keep side effects and logic *separate*
-  - write your tests *first*
+   - default to *immutability*
+   - think in terms of transformations, not loops
+   - compose your programs bottom-up
+   - keep side effects and logic *separate*
+   - write your tests *first*
 
-* Quotes
-  - "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." —Alan Perlis
-  - Functional programming is like describing your problem to a mathematician.
-  - Imperative programming is like giving instructions to an idiot.
-  - OOP cannot save us from the Cloud Monster anymore.
-  - using Python for FP it's like looking at a beautiful view through a dirty window
+** Quotes
+   - "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." —Alan Perlis
+   - Functional programming is like describing your problem to a mathematician.
+   - Imperative programming is like giving instructions to an idiot.
+   - OOP cannot save us from the Cloud Monster anymore.
+   - using Python for FP it's like looking at a beautiful view through a dirty window
 
 
-* Resources
+** Resources
 
-  - Okasaki for persistent data structures
-  - All Rich Hickey talks
-  - Why functional programming matters
+   - Okasaki for persistent data structures
+   - All Rich Hickey talks
+   - Why functional programming matters
 
 
 * Extra material
