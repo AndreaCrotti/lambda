@@ -186,8 +186,26 @@ correct code, and test it more easily.
 
 [[./images/domain.png]]
 
-* Haskell (1990)
+* Functional languages
 
+#+BEGIN_NOTES
+Here a short list of other interesting functional programming languages
+that have been getting a lot of traction recently.
+
+They all have slightly different constraints and approaches, but overall
+they all focus on immutability and function composition as the main
+way to write complex code.
+#+END_NOTES
+
+  - Haskell
+  - Clojure
+  - Scala
+  - F#
+  - Erlang
+  - Elixir
+  - Elm
+
+* Haskell (1990)
 
 #+BEGIN_NOTES
 The original intention was to talk about Python but in reality
@@ -200,6 +218,10 @@ used to write papers with.
 
 It's probably until now the most "complete" and pure functional programming
 language out there, and in some ways it's just incredibly beautiful.
+
+This joke here refers to the fact that while there is so much interest in
+Haskell not as many people use it in production, but in any case
+it's still probably the best language to really learn functional programming.
 #+END_NOTES
 
   - pure
@@ -235,6 +257,8 @@ in the generic case.
   fib n = fib (n-1) + fib (n-2)
 #+end_src
 
+
+** Fibonacci stream
 
 #+BEGIN_NOTES
 The second function is even more interesting since it condense in two lines
@@ -309,36 +333,61 @@ Haskell:
       in  smallerSorted ++ [x] ++ biggerSorted
 #+end_src
 
-* Other languages
-
-  - Clojure
-  - Scala
-  - F#
-  - Erlang
-  - Elixir
-  - Elm
-
 * Python vs Haskell
+
+#+BEGIN_NOTES
+Taking Haskell as the ideal functional programming language, what are the
+differences between Haskell and Python, or better what does Python actually
+supports.
+#+END_NOTES
 
   - ✓ functions first class citizens
   - ✓ lazy sequences (kind of)
-  - ❌ Algebraic data types
   - ❌ immutability (partial)
+  - ❌ Algebraic data types
   - ❌ side effects encapsulation
   - ❌ type inference
 
+** Screwed?
+
+#+BEGIN_NOTES
+So the question is, can we do any functional programming in Python?
+The answer is of course yes, even if we won't have all the nice things
+that other languages have we will still get many of the advantages anyway.
+#+END_NOTES
+
+[[./images/screwed.png]]
 
 ** Functions
 
+#+BEGIN_NOTES
+So let's start from functions as first class citizens.
+That is entirely true in Python, however we have 5 different ways
+to define a function, and I just want to first clarify what
+each of them mean and how they work.
+#+END_NOTES
+
+- function
+- lambda
+- classmethod
+- method
+- staticmethod
+
 [[./images/confused.gif]]
 
-*Demo time*
+*** Partial application
 
-*** Partial application/Currying
+#+BEGIN_NOTES
+One important building block is higher order functions and partial
+application.
+In the Python standard library there is a module called functools
+which has some nice functions, and one of them is functools.partial.
+#+END_NOTES
 
 *functools.partial*
 
 #+begin_src python
+
   import functools
 
   def mul(x, y):
@@ -350,26 +399,28 @@ Haskell:
   mulby3(10) # 30
 #+end_src
 
-*toolz.curry*
-
-#+begin_src haskell
-  mul:: Int -> Int -> Int
-  mul x y = x * y
-
-  mulby3:: Int -> Int
-  mulby3 = \x -> mul x 3
-#+end_src
+Equivalent to:
 
 #+begin_src python
-
+  def mulby3(x):
+      return mul(x, 3)
 #+end_src
 
 ** Lazy sequences
 
+#+BEGIN_NOTES
+Infinite streams are a very nice thing to use, because they really
+encapsulate the essence of the sequence, without having to worry
+about termination conditions.
+
+This is an example of a fibonacci numbers generator in Python,
+more or less equivalent to what we had seen previously in Haskell.
+#+END_NOTES
+
    - generators
    - itertools
 
-#+begin_src python
+#+begin_src python :tangle fib_gen.py
   import itertools
 
   def fib_gen():
@@ -381,6 +432,52 @@ Haskell:
 
   for num in itertools.islice(fib_gen(), 10):
       print(num)
+#+end_src
+
+** Map
+
+- Standard for loop:
+
+#+begin_src python
+  lis = [1, 2, 3, 4]
+
+  newlis = []
+  for l in lis:
+      newlis.append(l * 2)
+
+#+end_src
+
+- List comprehension:
+
+#+begin_src python
+  [l * 2 for l in lis]
+#+end_src
+
+- Look mum no loop:
+
+#+begin_src python
+  import operator
+  mul_by_two = functools.partial(operator.mul, 2)
+  map(mul_by_two, lis)
+#+end_src
+
+** Reduce
+
+- Loopy:
+
+#+begin_src python
+  lis = [1, 2, 3, 4]
+
+  val = 0
+  for l in lis:
+      val += 0
+
+#+end_src
+
+- Not loopy:
+
+#+begin_src python
+  val = functools.reduce(operator.add, lis)
 #+end_src
 
 ** Side effects
@@ -403,9 +500,9 @@ Non referential transparent:
       return SETTINGS['counter']
 #+end_src
 
-** Toolz
+** Immutability and toolz
 
-   - library with many nice functional programming functions
+   Toolz is a collection of utility functions inspired from FP languages.
 
 #+begin_src python
   import toolz
@@ -584,17 +681,6 @@ Testing becomes much *easier*
 
 #+end_src
 
-** Property based testing
-
-- originally from Haskell
-
-* Resources
-
-  - Okasaki for persistent data structures
-  - All Rich Hickey talks
-  - Why functional programming matters
-
-
 * Conclusions
 
 1. Lock Free Concurrency.
@@ -606,6 +692,14 @@ Testing becomes much *easier*
 7. Referential Transparency.
 8. Lesser Bugs.
 
+* Random tips
+  
+  - default to *immutability*
+  - think in terms of transformations, not loops
+  - compose your programs bottom-up
+  - keep side effects and logic *separate*
+  - write your tests *first*
+
 * Quotes
   - "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." —Alan Perlis
   - Functional programming is like describing your problem to a mathematician.
@@ -613,8 +707,15 @@ Testing becomes much *easier*
   - OOP cannot save us from the Cloud Monster anymore.
   - using Python for FP it's like looking at a beautiful view through a dirty window
 
-* Extra material
 
+* Resources
+
+  - Okasaki for persistent data structures
+  - All Rich Hickey talks
+  - Why functional programming matters
+
+
+* Extra material
 ** Lambda calculus primer
    
    Formal system for expressing computation based on
@@ -671,3 +772,14 @@ $2 \equiv \lambda sz. s(s(z))$
  [[./images/persistent2.png]]
 
 ** Pypersistent?
+
+** Currying
+*toolz.curry*
+
+#+begin_src haskell
+  mul:: Int -> Int -> Int
+  mul x y = x * y
+
+  mulby3:: Int -> Int
+  mulby3 = \x -> mul x 3
+#+end_src
