@@ -602,6 +602,20 @@ GOOD:
 
 * Simple example
 
+#+BEGIN_NOTES
+Let's look at a very simple example of how you can implement
+the same thing with a class or with simple functions.
+
+We have a class transformer that takes a collection, a method
+func and a method transform that calls func on the data.
+So what are the problems with this, well first the func
+method does not need to be a method, and second the transform
+is modifying self.data itself without returning it.
+
+But more importantly what are we gaining by using classes here?
+
+#+END_NOTES
+
 ** OOP
 
 #+begin_src python :tangle python_samples.py
@@ -624,6 +638,12 @@ GOOD:
 
 ** FP
 
+#+BEGIN_NOTES
+Probably nothing from that example really because it can be much more
+easily all done just by composing functions as seen here.
+#+END_NOTES
+
+
 #+begin_src python :tangle python_samples.py
   def evens(collection):
       return filter(lambda x: x % 2 ==0, collection)
@@ -636,7 +656,30 @@ GOOD:
 
 * Refactor journey
 
+
+#+BEGIN_NOTES
+So now let's have a look at another example, starting from something
+that might look familiar and understanding what are the issues with it.
+
+The previous example was a bit trivial since it didn't really involve
+any side effect, so we can instead look at something that involves side
+effects, and see what we can do to improve that anyway.
+#+END_NOTES
+
 ** The mess
+
+#+BEGIN_NOTES
+This function simplyh list files in the filesystem, and if a filename contains the string to-match
+it writes it out to the database.
+The first interesting thing is that the name of the function is long_crappy_function, and
+the reason for that is that since it clearly does too many things it's not really
+easy in general to give it a name.
+
+So assuming we have some integration tests (if not we would write some) that allow
+us to refactor this without breaking everything, we can start by splitting this in three
+components.
+#+END_NOTES
+
 
 #+begin_src python :tangle python_samples.py
   import subprocess, sqlite3
@@ -663,22 +706,12 @@ GOOD:
 
 #+end_src
 
-** Extract database update
-
-
-#+begin_src python :tangle python_samples.py
-
-  def update_to_database(res):
-      ## updating the results to database
-      dbc = sqlite3.connect("lambda.db")
-      cursor = dbc.cursor()
-
-      for r in res:
-         cursor.execute('INSERT INTO table VALUES (%s)' % r)
- #+end_src
-
 ** Extract 'ls' execution
 
+#+BEGIN_NOTES
+First we get the output from ls in a way that is already easy to process,
+as a list of unicode strings
+#+END_NOTES
 
 #+begin_src python :tangle python_samples.py
 
@@ -694,7 +727,31 @@ GOOD:
 
 #+end_src
 
+** Extract database update
+
+#+BEGIN_NOTES
+The we write the function that writes to the database.
+#+END_NOTES
+
+
+#+begin_src python :tangle python_samples.py
+
+  def update_to_database(res):
+      ## updating the results to database
+      dbc = sqlite3.connect("lambda.db")
+      cursor = dbc.cursor()
+
+      for r in res:
+         cursor.execute('INSERT INTO table VALUES (%s)' % r)
+ #+end_src
+
 ** Extract filter output
+
+#+BEGIN_NOTES 
+And finally we can write out the filtering function, which is now written
+in this loop style, but can be written also just as a simple filter.
+#+END_NOTES
+
 
 #+begin_src python :tangle python_samples.py
 
@@ -716,24 +773,22 @@ Or even better:
   def filter_output(out):
       return filter(lambda l: 'to-match' in l, out)
 
-#+end_src
-
-
-** And finally
-
-
-#+begin_src python :tangle python_samples.py
-  def write_filtered_ls_to_db():
-      """Do a bit of everything
-      """
-      out = run_ls()
-      res = filter_output(out)
-      update_to_database(res)
+  # or using partial application
+  def filter_output2(out):
+      match_function = functools.partial(operator.contains, 'to-match')
+      return filter(match_function, out)
 #+end_src
 
 ** Now test this
 
- Testing becomes much *easier*
+#+BEGIN_NOTES
+The important thing is that now we can actually write unit tests
+for this, in a way that we were not able todo before.
+The filter_output function in fact does not care about the filesystem,
+and does not care about the database, all it needs is a list of strings.
+#+END_NOTES
+
+ Unit tests becomes *possible*
 
  #+begin_src python :tangle python_samples.py
 
@@ -746,6 +801,105 @@ Or even better:
        assert filter_output(lines) == desired
 
  #+end_src
+
+
+** And finally
+
+#+BEGIN_NOTES
+And now we can put it all back together writing a simple pipe.
+#+END_NOTES
+
+
+#+begin_src python :tangle python_samples.py
+  def write_filtered_ls_to_db():
+      """Do a bit of everything
+      """
+      out = run_ls()
+      res = filter_output(out)
+      update_to_database(res)
+#+end_src
+
+* Extract the functional bit
+
+** In the beginning
+
+#+begin_src python
+  def merge_part_files():
+      merged_key = output_bucket.initiate_multipart_upload(output_key)
+      chunk = StringIO()
+      parts = 0
+      for key in input_bucket.list(input_prefix):
+          if key.name.endswith(".gz"):
+              if key.size < FIVE_MEGABYTES:
+                  chunk.write(key.get_contents_as_string())
+                  if chunk.len > FIVE_MEGABYTES:
+                      chunk.seek(0)
+                      parts += 1
+                      merged_key.upload_part_from_file(chunk, parts)
+                      chunk.close()
+                      chunk = StringIO()
+              else:
+                  parts += 1
+                  merged_key.copy_part_from_key(input_bucket.name, key.name,
+                                                parts)
+      if chunk.len:
+          chunk.seek(0)
+          parts += 1
+          merged_key.upload_part_from_file(chunk, parts)
+          chunk.close()
+#+end_src
+
+** Extract partitioning
+
+#+begin_src python
+@pytest.mark.parametrize(('input', 'expected'), [
+    ([Key('a', 10), Key('b', 20), Key('c', 50), Key('d', 60)],
+     [[Key('a', 10), Key('b', 20), Key('c', 50)], Key('d', 60)]),
+    ([Key('a', 40), Key('b', 40), Key('c', 20)],
+     # in this case the second partition is not greater than threshold
+     # but there is no alternative without a full look-ahead
+     [[Key('a', 40), Key('b', 40)], [Key('c', 20)]]),
+])
+def test_partitioned_list(input, expected):
+    assert list(s3_utils.partition_list(input, threshold=50)) == expected
+
+#+end_src
+
+#+begin_src python
+  def partition_list(lis, threshold):
+      chunk, partial = [], 0
+      idx = 0
+      while idx < len(lis):
+          if lis[idx].size < threshold:
+              while partial < threshold and idx < len(lis):
+                  chunk.append(lis[idx])
+                  partial += lis[idx].size
+                  idx += 1
+
+              yield chunk
+              chunk, partial = [], 0
+          else:
+              yield lis[idx]
+              idx += 1
+
+#+end_src
+
+** Use the new abstraction
+#+begin_src python
+  def merge_part_files():
+      for parts in partition_list(key_list, threshold=CHUNK_SIZE):
+          if isinstance(parts, list):
+              chunk = StringIO()
+              for part in parts:
+                  chunk.write(part.get_contents_as_string())
+                  _inc(out, part.size)
+
+              chunk.seek(0)
+              out.mp.upload_part_from_file(chunk, out.parts)
+          else:
+              _inc(out, parts.size)
+              out.mp.copy_part_from_key(input_bucket.name, parts.key, out.parts)
+#+end_src
 
 * Conclusions
 
