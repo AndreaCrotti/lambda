@@ -922,13 +922,33 @@ def test_partitioned_list(input, expected):
    - keep side effects and logic *separate*
    - write your tests *first*
 
-** Quotes
-   - "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." —Alan Perlis
-   - Functional programming is like describing your problem to a mathematician.
-   - Imperative programming is like giving instructions to an idiot.
-   - OOP cannot save us from the Cloud Monster anymore.
-   - using Python for FP it's like looking at a beautiful view through a dirty window
+* Quotes
 
+** 10 100
+
+ #+BEGIN_QUOTE
+ "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." —Alan Perlis
+ #+END_QUOTE
+   
+** Describing
+
+#+BEGIN_QUOTE
+Functional programming is like describing your problem to a mathematician.
+Imperative programming is like giving instructions to an idiot. - Arcus #scheme
+#+END_QUOTE
+
+** Cloud
+
+#+BEGIN_QUOTE
+  OOP cannot save us from the Cloud Monster anymore. - Ju Gonçalves
+#+END_QUOTE
+
+** Python FP
+
+#+BEGIN_QUOTE
+using Python for FP it's like looking at a beautiful view through a dirty window - Andrea Crotti
+
+#+END_QUOTE
 
 ** Resources
 
