@@ -324,7 +324,7 @@ Haskell:
   - ❌ Algebraic data types
   - ❌ immutability (partial)
   - ❌ side effects encapsulation
-  - ❌ type system
+  - ❌ type inference
 
 * Python and functions
 
