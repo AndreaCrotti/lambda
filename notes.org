@@ -373,7 +373,8 @@ each of them mean and how they work.
 - method
 - staticmethod
 
-[[./images/confused.gif]]
+*Demo time*
+# [[./images/confused.gif]]
 
 *** Partial application
 
@@ -415,6 +416,13 @@ about termination conditions.
 
 This is an example of a fibonacci numbers generator in Python,
 more or less equivalent to what we had seen previously in Haskell.
+
+The generator is defined by yielding a new value every time lazily.
+The itertools.islice function then will take a slice from
+the 10th to the 100th element of this infinite stream, without
+having to realize it completely.
+Many other useful functions like takewhile/dropwhile/chain and
+so on and so forth are also part of this module.
 #+END_NOTES
 
    - generators
@@ -430,11 +438,28 @@ more or less equivalent to what we had seen previously in Haskell.
           yield b
           a, b = b, a + b
 
-  for num in itertools.islice(fib_gen(), 10):
+  for num in itertools.islice(fib_gen(), 10, 100):
       print(num)
 #+end_src
 
 ** Map
+
+#+BEGIN_NOTES
+As we said in the beginning one of the typical constraints of
+FP is the lack of for/while loops.
+A loop can just be translated by a transformation on an iterable
+instead.
+Map and reduce (together with many more) are part of the standard
+library and are bulding blocks of Spark for example (not a concidence
+since Spark is written in Scala that is a functional language).
+
+So suppose we want to transform a list doubling all the elements.
+We can either do a simple loop and accumulate on a new list, use
+a list comprehension as shown here or we can get rid of loops completely.
+
+Here we first define the double function as a partial application
+and then apply that to the given list.
+#+END_NOTES
 
 - Standard for loop:
 
@@ -463,6 +488,13 @@ more or less equivalent to what we had seen previously in Haskell.
 
 ** Reduce
 
+#+BEGIN_NOTES
+Another important operation is reduce, which a function cumulatively
+to the items of a sequence from left to right, reducing the list
+to a single value.
+This is the loopy version and below the same operation done using reduce.
+#+END_NOTES
+
 - Loopy:
 
 #+begin_src python
@@ -482,6 +514,20 @@ more or less equivalent to what we had seen previously in Haskell.
 
 ** Side effects
 
+#+BEGIN_NOTES
+Previously we talked about side effects and referential transparency,
+I'll just give an example to clarify these two concepts in Python.
+The first example is a simple adder, but after doing the actual addition
+it also writes out to disk, which is a side effect, thus the function is not pure.
+
+The second one instead is interesting because even though it does not have
+side effects, it's not referential transparent because the return value
+depends on a global dictionary.
+Since that dictionary is mutable any other code could modify that at any time,
+and so the function is not referentiall transparent.
+#+END_NOTES
+
+
 Side effect:
 #+begin_src python
   def adder(x, y):
@@ -490,14 +536,13 @@ Side effect:
       return res
 #+end_src
 
-Non referential transparent:
+*Non* referential transparent:
 
 #+begin_src python
   SETTINGS = {'counter': 1}
 
   def increment(inc_value):
-      SETTINGS['counter'] += inc_value
-      return SETTINGS['counter']
+      return SETTINGS['counter'] + inc_value
 #+end_src
 
 ** Immutability and toolz
