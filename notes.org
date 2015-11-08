@@ -271,6 +271,21 @@ Which in Python is roughly:
 
 ** Quicksort
 
+#+BEGIN_NOTES
+Now let's have a quick look at another example, the famous quicksort algorithm.
+It's a recursive algorithm and this here is the pseudocode.
+
+The version below is the actual full implementation in Haskell of the same algorithm.
+A couple of interesting things here, the pattern matching in the input matches on
+the first element of the list and all the rest.
+
+And the other interesting thing is that the type signature is completely generic now.
+Anything that is instance of the class Ord can be passed and you will get as return
+a new list with elements of the same type sorted.
+While this is not a really clever or fast implementation it's still incredibly concise
+and readable.
+#+END_NOTES
+
 Pseudocode:
 
 #+begin_src python
@@ -303,10 +318,10 @@ Haskell:
   - Elixir
   - Elm
 
-* Python and FP
+* Python vs Haskell
 
   - [ ] Algebraic data types
-  - [ ] immutability
+  - [ ] immutability (partially)
   - [ ] side effects encapsulation
   - [ ] type system
   - [X] functions first class citizens
