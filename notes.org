@@ -320,51 +320,19 @@ Haskell:
 
 * Python vs Haskell
 
-  - [ ] Algebraic data types
-  - [ ] immutability (partially)
-  - [ ] side effects encapsulation
-  - [ ] type system
-  - [X] functions first class citizens
-
-* Simple example
-
-** OOP
-
-#+begin_src python
-
-  class Transformer(object):
-      def __init__(self, collection):
-          self.data = collection
-
-      def func(self, collection):
-          return filter(lambda x: x % 2 ==0, collection)
-
-      def transform(self):
-          self.data = self.func(self.data)
-
-  tr = Transformer(range(10))
-  tr.transform()
-  tr.data
-
-#+end_src
-
-** FP
-
-#+begin_src python
-  def evens(collection):
-      return filter(lambda x: x % 2 ==0, collection)
-
-  def transform(func, collection):
-      return func(collection)
-
-  transform(evens, range(10))
-#+end_src
+  - ✓ functions first class citizens
+  - ❌ Algebraic data types
+  - ❌ immutability (partial)
+  - ❌ side effects encapsulation
+  - ❌ type system
 
 * Python and functions
 
 ** Methods, classmethods, staticmethods, functions, lambda??
 
 [[./images/confused.gif]]
+
+*Demo time*
 
 * Are we screwed?
 
@@ -412,6 +380,41 @@ GOOD:
    - relationship between streams and pure functions
 
 ** Pypersistent?
+
+
+* Simple example
+
+** OOP
+
+#+begin_src python
+
+  class Transformer(object):
+      def __init__(self, collection):
+          self.data = collection
+
+      def func(self, collection):
+          return filter(lambda x: x % 2 ==0, collection)
+
+      def transform(self):
+          self.data = self.func(self.data)
+
+  tr = Transformer(range(10))
+  tr.transform()
+  tr.data
+
+#+end_src
+
+** FP
+
+#+begin_src python
+  def evens(collection):
+      return filter(lambda x: x % 2 ==0, collection)
+
+  def transform(func, collection):
+      return func(collection)
+
+  transform(evens, range(10))
+#+end_src
 
 * Testing
 
