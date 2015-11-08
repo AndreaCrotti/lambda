@@ -389,14 +389,14 @@ which has some nice functions, and one of them is functools.partial.
 
 #+begin_src python :tangle python_samples.py
 
-  import functools
+  import functools, operator
 
   def mul(x, y):
       return x * y
 
   mul(3, 10) # 30
 
-  mulby3 = functools.partial(3)
+  mulby3 = functools.partial(operator.mul, 3)
   mulby3(10) # 30
 #+end_src
 
@@ -636,7 +636,7 @@ GOOD:
 
 ** Refactor journey
 
-#+begin_src python :tangle python_samples.py
+#+begin_src python
   import subprocess, MySQLdb
 
   def long_crappy_function():
@@ -665,7 +665,7 @@ GOOD:
 ** Extract database update
 
 
-#+begin_src python :tangle python_samples.py
+#+begin_src python
 
   def update_to_database(res):
       ## updating the results to database
@@ -679,7 +679,7 @@ GOOD:
 ** Extract 'ls' execution
 
 
-#+begin_src python :tangle python_samples.py
+#+begin_src python
 
   def run_ls():
       ## launching a shell command
@@ -696,7 +696,7 @@ GOOD:
 
 ** Extract filter output
 
-#+begin_src python :tangle python_samples.py
+#+begin_src python
 
 
   def filter_output(out):
@@ -711,7 +711,7 @@ GOOD:
 
 Or even better:
 
-#+begin_src python :tangle python_samples.py
+#+begin_src python
 
   def filter_output(out):
       return filter(lambda l: 'to-match' in l, out)
@@ -722,7 +722,7 @@ Or even better:
 ** And finally
 
 
-#+begin_src python :tangle python_samples.py
+#+begin_src python
   def write_filtered_ls_to_db():
       """Do a bit of everything
       """
@@ -735,7 +735,7 @@ Or even better:
 
 Testing becomes much *easier*
 
-#+begin_src python :tangle python_samples.py
+#+begin_src python
 
   def filter_output(out):
       return filter(lambda l: 'to-match' in l, out)
