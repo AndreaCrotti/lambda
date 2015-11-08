@@ -321,28 +321,86 @@ Haskell:
 * Python vs Haskell
 
   - ✓ functions first class citizens
+  - ✓ lazy sequences (kind of)
   - ❌ Algebraic data types
   - ❌ immutability (partial)
   - ❌ side effects encapsulation
   - ❌ type inference
 
-* Python and functions
 
-** Methods, classmethods, staticmethods, functions, lambda??
+** Functions
 
 [[./images/confused.gif]]
 
 *Demo time*
 
-* Are we screwed?
+*** Partial application/Currying
 
-** Itertools
+*functools.partial*
 
-   - standard library module for infinite streams
-   - *use it*
+#+begin_src python
+  import functools
+
+  def mul(x, y):
+      return x * y
+
+  mul(3, 10) # 30
+
+  mulby3 = functools.partial(3)
+  mulby3(10) # 30
+#+end_src
+
+*toolz.curry*
+
+#+begin_src haskell
+  mul:: Int -> Int -> Int
+  mul x y = x * y
+
+  mulby3:: Int -> Int
+  mulby3 = \x -> mul x 3
+#+end_src
 
 #+begin_src python
 
+#+end_src
+
+** Lazy sequences
+
+   - generators
+   - itertools
+
+#+begin_src python
+  import itertools
+
+  def fib_gen():
+      a, b = 0, 1
+      yield a
+      while True:
+          yield b
+          a, b = b, a + b
+
+  for num in itertools.islice(fib_gen(), 10):
+      print(num)
+#+end_src
+
+** Side effects
+
+Side effect:
+#+begin_src python
+  def adder(x, y):
+      res = x + y
+      open('output.txt', 'w').write(str(res))
+      return res
+#+end_src
+
+Non referential transparent:
+
+#+begin_src python
+  SETTINGS = {'counter': 1}
+
+  def increment(inc_value):
+      SETTINGS['counter'] += inc_value
+      return SETTINGS['counter']
 #+end_src
 
 ** Toolz
@@ -373,14 +431,6 @@ GOOD:
       func = lambda val: val + 1
       return toolz.valmap(func, dic)
 #+end_src
-
-** Generators and higher order functions
-
-   - infinite streams
-   - relationship between streams and pure functions
-
-** Pypersistent?
-
 
 * Simple example
 
@@ -552,9 +602,9 @@ Testing becomes much *easier*
 3. Lazy Evaluation.
 4. Composability.
 5. Parallelism.
-5. Improved ways of Testing.
-6. Referential Transparency.
-7 Lesser Bugs.
+6. Improved ways of Testing.
+7. Referential Transparency.
+8. Lesser Bugs.
 
 * Quotes
   - "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." —Alan Perlis
@@ -619,3 +669,5 @@ $2 \equiv \lambda sz. s(s(z))$
  #+end_src
 
  [[./images/persistent2.png]]
+
+** Pypersistent?
