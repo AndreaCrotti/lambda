@@ -178,13 +178,15 @@ is that it has a domain and a codomain, so it always transforms
 values of type X to values of type Y.
 
 Not all FP programming languages are statically typed but types
-are always present anyway and you should always keep them in mind.
-
+are always present anyway and you should always keep them in mind
+when you're writing your code.
+As we can see later types are also a very important help in writing
+correct code, and test it more easily.
 #+END_NOTES
 
 [[./images/domain.png]]
 
-* Haskell
+* Haskell (1990)
 
 
 #+BEGIN_NOTES
@@ -200,7 +202,6 @@ It's probably until now the most "complete" and pure functional programming
 language out there, and in some ways it's just incredibly beautiful.
 #+END_NOTES
 
-  - First version in 1990
   - pure
   - lazy
   - pattern matching
@@ -270,6 +271,19 @@ Which in Python is roughly:
 
 ** Quicksort
 
+Pseudocode:
+
+#+begin_src python
+  quicksort(A, lo, hi)
+      if lo < hi
+          p := pivot(A, lo, hi)
+          left, right := partition(A, p, lo, hi)
+          quicksort(A, lo, left)
+          quicksort(A, right, hi)
+#+end_src
+
+Haskell:
+
 #+begin_src haskell
   quicksort :: (Ord a) => [a] -> [a]
   quicksort [] = []
@@ -288,6 +302,14 @@ Which in Python is roughly:
   - Erlang
   - Elixir
   - Elm
+
+* Python and FP
+
+  - [ ] Algebraic data types
+  - [ ] immutability
+  - [ ] side effects encapsulation
+  - [ ] type system
+  - [X] functions first class citizens
 
 * Simple example
 
@@ -322,44 +344,6 @@ Which in Python is roughly:
 
   transform(evens, range(10))
 #+end_src
-
-* Side effects and immutability
-
-  - what is a side effect
-  - why is it bad
-  - how to encapsulate them properly
-  - demo about refactoring using
-
-* Immutability
-
-  [[./images/too_many_objects.png]]
-
-** Persistent data structures 1/2
-
-#+begin_src haskell
-
-  xs = [0, 1, 2]
-  ys = [3, 4, 5]
-
-#+end_src
-
-[[./images/persistent1.png]]
-
-** Persistent data structures 2/2
-
-#+begin_src haskell
-  zs = xs ++ ys
-#+end_src
-
-[[./images/persistent2.png]]
-
-* Python and FP
-
-  - [ ] immutability
-  - [ ] TCO (Tail Call Optimization)
-  - [ ] side effects encapsulation
-  - [ ] type system
-  - [X] functions first class citizens
 
 * Python and functions
 
@@ -594,3 +578,26 @@ $2 \equiv \lambda sz. s(s(z))$
  # Local Variables:
  # after-save-hook: (org-reveal-export-to-html)
  # End:
+
+** Immutability
+
+   [[./images/too_many_objects.png]]
+
+*** Persistent data structures 1/2
+
+ #+begin_src haskell
+
+   xs = [0, 1, 2]
+   ys = [3, 4, 5]
+
+ #+end_src
+
+ [[./images/persistent1.png]]
+
+*** Persistent data structures 2/2
+
+ #+begin_src haskell
+   zs = xs ++ ys
+ #+end_src
+
+ [[./images/persistent2.png]]
