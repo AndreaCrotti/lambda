@@ -272,7 +272,7 @@ The way this works is that we use the : to create a list and concatenate
 
 Or better:
 
-#+begin_src haskell
+#+begin_src haskell :tangle haskell_samples.hs
   -- zipWith :: (a -> b -> c) -> [a] -> [b] -> [c]
   fibs:: [Int]
   fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
@@ -284,10 +284,10 @@ Or better:
 
 Which in Python is roughly:
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
   first_fibs = [0, 1, 2, 3, 5]
 
-  fibs = [0, 1] + map(sum, zip(first_fibs, first_fibs[1:]))
+  fibs = [0, 1] + list(map(sum, zip(first_fibs, first_fibs[1:])))
   # Out[5]: [0, 1, 1, 2, 3, 5, 8]
 #+end_src
 
@@ -323,7 +323,7 @@ Pseudocode:
 
 Haskell:
 
-#+begin_src haskell
+#+begin_src haskell :tangle haskell_samples.hs
   quicksort :: (Ord a) => [a] -> [a]
   quicksort [] = []
   quicksort (x:xs) =
@@ -387,7 +387,7 @@ which has some nice functions, and one of them is functools.partial.
 
 *functools.partial*
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
 
   import functools
 
@@ -402,7 +402,7 @@ which has some nice functions, and one of them is functools.partial.
 
 Equivalent to:
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
   def mulby3(x):
       return mul(x, 3)
 #+end_src
@@ -428,7 +428,7 @@ so on and so forth are also part of this module.
    - generators
    - itertools
 
-#+begin_src python :tangle fib_gen.py
+#+begin_src python :tangle python_samples.py
   import itertools
 
   def fib_gen():
@@ -463,7 +463,7 @@ and then apply that to the given list.
 
 - Standard for loop:
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
   lis = [1, 2, 3, 4]
 
   newlis = []
@@ -474,13 +474,13 @@ and then apply that to the given list.
 
 - List comprehension:
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
   [l * 2 for l in lis]
 #+end_src
 
 - Look mum no loop:
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
   import operator
   mul_by_two = functools.partial(operator.mul, 2)
   map(mul_by_two, lis)
@@ -497,7 +497,7 @@ This is the loopy version and below the same operation done using reduce.
 
 - Loopy:
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
   lis = [1, 2, 3, 4]
 
   val = 0
@@ -508,7 +508,7 @@ This is the loopy version and below the same operation done using reduce.
 
 - Not loopy:
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
   val = functools.reduce(operator.add, lis)
 #+end_src
 
@@ -529,7 +529,7 @@ and so the function is not referentiall transparent.
 
 
 Side effect:
-#+begin_src python
+#+begin_src python :tangle python_samples.py
   def adder(x, y):
       res = x + y
       open('output.txt', 'w').write(str(res))
@@ -538,7 +538,7 @@ Side effect:
 
 *Non* referential transparent:
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
   SETTINGS = {'counter': 1}
 
   def increment(inc_value):
@@ -547,9 +547,26 @@ Side effect:
 
 ** Immutability and toolz
 
+#+BEGIN_NOTES
+Immutability is extremely important for functional programming, and while
+sadly in Python it's not really possible to ensure immutability, we can
+still try to never mutate by convention.
+
+One of the most commonly used data structures for example is a dictionary,
+which is by its very nature mutable.
+If we use toolz however it will give us the ability to stop mutating dictionaries
+and just creating new copies of them very easily.
+
+Let' see now for example a simple dictionary, and all we want to do do
+is to increment all the values.
+The most "normal" way would be too loop over key and values and modify it
+inline, but another way would be to use toolz.valmap that creates a
+new dictionary and maps the function we pass in to.
+#+END_NOTES
+
    Toolz is a collection of utility functions inspired from FP languages.
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
   import toolz
 
   bills = {
@@ -560,7 +577,7 @@ Side effect:
 
 BAD:
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
     def change_inline(bills):
         for key, val in bills.items():
             bills[key] = val + 1
@@ -568,17 +585,21 @@ BAD:
 
 GOOD:
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
   def change_immutable(dic):
-      func = lambda val: val + 1
-      return toolz.valmap(func, dic)
+      inc = functools.partial(operator.add, 1)
+      return toolz.valmap(inc, dic)
 #+end_src
+
+** Other dictionary functions
+
+[[./images/dicttoolz.png]]
 
 * Simple example
 
 ** OOP
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
 
   class Transformer(object):
       def __init__(self, collection):
@@ -598,7 +619,7 @@ GOOD:
 
 ** FP
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
   def evens(collection):
       return filter(lambda x: x % 2 ==0, collection)
 
@@ -615,7 +636,7 @@ GOOD:
 
 ** Refactor journey
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
   import subprocess, MySQLdb
 
   def long_crappy_function():
@@ -644,7 +665,7 @@ GOOD:
 ** Extract database update
 
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
 
   def update_to_database(res):
       ## updating the results to database
@@ -658,7 +679,7 @@ GOOD:
 ** Extract 'ls' execution
 
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
 
   def run_ls():
       ## launching a shell command
@@ -675,7 +696,7 @@ GOOD:
 
 ** Extract filter output
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
 
 
   def filter_output(out):
@@ -690,7 +711,7 @@ GOOD:
 
 Or even better:
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
 
   def filter_output(out):
       return filter(lambda l: 'to-match' in l, out)
@@ -701,7 +722,7 @@ Or even better:
 ** And finally
 
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
   def write_filtered_ls_to_db():
       """Do a bit of everything
       """
@@ -714,7 +735,7 @@ Or even better:
 
 Testing becomes much *easier*
 
-#+begin_src python
+#+begin_src python :tangle python_samples.py
 
   def filter_output(out):
       return filter(lambda l: 'to-match' in l, out)
@@ -799,7 +820,7 @@ $2 \equiv \lambda sz. s(s(z))$
 
 *** Persistent data structures 1/2
 
- #+begin_src haskell
+ #+begin_src haskell :tangle haskell_samples.hs
 
    xs = [0, 1, 2]
    ys = [3, 4, 5]
@@ -810,7 +831,7 @@ $2 \equiv \lambda sz. s(s(z))$
 
 *** Persistent data structures 2/2
 
- #+begin_src haskell
+ #+begin_src haskell :tangle haskell_samples.hs
    zs = xs ++ ys
  #+end_src
 
@@ -821,7 +842,7 @@ $2 \equiv \lambda sz. s(s(z))$
 ** Currying
 *toolz.curry*
 
-#+begin_src haskell
+#+begin_src haskell :tangle haskell_samples.hs
   mul:: Int -> Int -> Int
   mul x y = x * y
 
