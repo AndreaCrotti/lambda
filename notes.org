@@ -1,5 +1,5 @@
 #+AUTHOR: Andrea Crotti
-#+TITLE: Functional Programming
+#+TITLE: Gentle introduction to Functional Programming
 #+OPTIONS: num:nil ^:nil tex:t toc:nil reveal_progress:t reveal_control:t reveal_overview:t
 #+REVEAL_TRANS: fade
 #+REVEAL_SPEED: fast
