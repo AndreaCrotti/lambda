@@ -596,6 +596,8 @@ IMMUTABLE:
 
 * Simple example
 
+** OOP
+
 #+BEGIN_NOTES
 Let's look at a very simple example of how you can implement
 the same thing with a class or with simple functions.
@@ -607,10 +609,7 @@ method does not need to be a method, and second the transform
 is modifying self.data itself without returning it.
 
 But more importantly what are we gaining by using classes here?
-
 #+END_NOTES
-
-** OOP
 
 #+begin_src python :tangle python_samples.py
 
@@ -750,9 +749,9 @@ in this loop style, but can be written also just as a simple filter.
 #+begin_src python :tangle python_samples.py
 
 
-  def filter_output(out):
+  def filter_output(lines):
       res = []
-      for line in out:
+      for line in lines:
           if 'to-match' in line:
               res.append(line)
 
@@ -764,13 +763,13 @@ Or even better:
 
 #+begin_src python :tangle python_samples.py
 
-  def filter_output(out):
-      return filter(lambda l: 'to-match' in l, out)
+  def filter_output(lines):
+      return filter(lambda l: 'to-match' in l, lines)
 
   # or using partial application
-  def filter_output2(out):
+  def filter_output2(lines):
       match_function = functools.partial(operator.contains, 'to-match')
-      return filter(match_function, out)
+      return filter(match_function, lines)
 #+end_src
 
 ** Now test this
@@ -869,17 +868,15 @@ And now we can put it all back together writing a simple pipe.
 ** Extract partitioning
 
 #+begin_src python
-@pytest.mark.parametrize(('input', 'expected'), [
-    ([Key('a', 10), Key('b', 20), Key('c', 50), Key('d', 60)],
-     [[Key('a', 10), Key('b', 20), Key('c', 50)], Key('d', 60)]),
-    ([Key('a', 40), Key('b', 40), Key('c', 20)],
-     # in this case the second partition is not greater than threshold
-     # but there is no alternative without a full look-ahead
-     [[Key('a', 40), Key('b', 40)], [Key('c', 20)]]),
-])
-def test_partitioned_list(input, expected):
-    assert list(s3_utils.partition_list(input, threshold=50)) == expected
-
+  Key = namedtuple('Key', ['name', 'size'])
+  @pytest.mark.parametrize(('input', 'expected'), [
+      ([Key('a', 10), Key('b', 20), Key('c', 50), Key('d', 60)],
+       [[Key('a', 10), Key('b', 20), Key('c', 50)], Key('d', 60)]),
+      ([Key('a', 40), Key('b', 40), Key('c', 20)],
+       [[Key('a', 40), Key('b', 40)], [Key('c', 20)]]),
+  ])
+  def test_partitioned_list(input, expected):
+      assert list(s3_utils.partition_list(input, threshold=50)) == expected
 #+end_src
 
 #+begin_src python
