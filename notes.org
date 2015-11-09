@@ -569,7 +569,7 @@ new dictionary and maps the function we pass in to.
   }
 #+end_src
 
-BAD:
+MUTABLE:
 
 #+begin_src python :tangle python_samples.py
     def change_inline(bills):
@@ -577,7 +577,7 @@ BAD:
             bills[key] = val + 1
 #+end_src
 
-GOOD:
+IMMUTABLE:
 
 #+begin_src python :tangle python_samples.py
   def change_immutable(dic):
