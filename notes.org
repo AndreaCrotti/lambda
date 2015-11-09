@@ -53,7 +53,7 @@ immutability.
     - partial application
     - currying
 
-  - *Pure* functions
+  - Functions are *pure*
     - immutable data: *no state*
     - encapsulated side effects
 
@@ -162,6 +162,39 @@ $f(4) = 9$
 
 - *referential transparency*:
   a function call can be always replaced by its result
+
+** Side effects
+
+#+BEGIN_NOTES
+Previously we talked about side effects and referential transparency,
+I'll just give an example to clarify these two concepts in Python.
+The first example is a simple adder, but after doing the actual addition
+it also writes out to disk, which is a side effect, thus the function is not pure.
+
+The second one instead is interesting because even though it does not have
+side effects, it's not referential transparent because the return value
+depends on a global dictionary.
+Since that dictionary is mutable any other code could modify that at any time,
+and so the function is not referentiall transparent.
+#+END_NOTES
+
+
+Side effect:
+#+begin_src python :tangle python_samples.py
+  def adder(x, y):
+      res = x + y
+      open('output.txt', 'w').write(str(res))
+      return res
+#+end_src
+
+*Non* referential transparent:
+
+#+begin_src python :tangle python_samples.py
+  SETTINGS = {'counter': 1}
+
+  def increment(inc_value):
+      return SETTINGS['counter'] + inc_value
+#+end_src
 
 ** Domains
 
@@ -506,39 +539,6 @@ Not loopy:
   val = functools.reduce(operator.add, lis)
 #+end_src
 
-** Side effects
-
-#+BEGIN_NOTES
-Previously we talked about side effects and referential transparency,
-I'll just give an example to clarify these two concepts in Python.
-The first example is a simple adder, but after doing the actual addition
-it also writes out to disk, which is a side effect, thus the function is not pure.
-
-The second one instead is interesting because even though it does not have
-side effects, it's not referential transparent because the return value
-depends on a global dictionary.
-Since that dictionary is mutable any other code could modify that at any time,
-and so the function is not referentiall transparent.
-#+END_NOTES
-
-
-Side effect:
-#+begin_src python :tangle python_samples.py
-  def adder(x, y):
-      res = x + y
-      open('output.txt', 'w').write(str(res))
-      return res
-#+end_src
-
-*Non* referential transparent:
-
-#+begin_src python :tangle python_samples.py
-  SETTINGS = {'counter': 1}
-
-  def increment(inc_value):
-      return SETTINGS['counter'] + inc_value
-#+end_src
-
 ** Immutability and toolz
 
 #+BEGIN_NOTES
@@ -813,7 +813,7 @@ And now we can put it all back together writing a simple pipe.
       update_to_database(res)
 #+end_src
 
-* Extract the functional bit
+* Find the diamond
 
 ** In the beginning
 
@@ -841,6 +841,29 @@ And now we can put it all back together writing a simple pipe.
           parts += 1
           merged_key.upload_part_from_file(chunk, parts)
           chunk.close()
+#+end_src
+
+** Fix the bug
+
+#+begin_src python
+   while idx < len(key_list):
+       key = key_list[idx]
+       if key.size < CHUNK_SIZE:
+           while chunk.len < CHUNK_SIZE:
+               chunk.write(key.get_contents_as_string())
+               idx += 1
+               key = key_list[idx]
+
+           chunk.seek(0)
+           _inc(chunk.len)
+           out.mp.upload_part_from_file(chunk, out.parts)
+           chunk.close()
+           chunk = StringIO()
+
+       elif idx < len(key_list):
+           _inc(key.size)
+           out.mp.copy_part_from_key(input_bucket.name, key.key, out.parts)
+           idx += 1
 #+end_src
 
 ** Extract partitioning
