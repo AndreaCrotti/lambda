@@ -936,6 +936,11 @@ And now we can put it all back together writing a simple pipe.
    - keep side effects and logic *separate*
    - write your tests *first*
 
+
+** Questions
+
+[[./images/questions.gif]]
+
 * Quotes
 
 ** 10 100
@@ -979,7 +984,6 @@ using Python for FP it's like looking at a beautiful view through a dirty window
    - Okasaki for persistent data structures
    - All Rich Hickey talks
    - Why functional programming matters
-
 
 * Extra material
 ** Lambda calculus primer
