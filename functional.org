@@ -6,3 +6,85 @@
 #+EMAIL: andrea.crotti.0@gmail.com
 #+TOC: listings
 
+* Abstract
+
+This talk will be a journey in the world of functional programming, starting from its origin to the current days.
+
+After an introduction and a bit of theory we will talk about how to do functional programming in Python and what are the advantages.
+
+* What?
+
+#+BEGIN_NOTES
+
+#+END_NOTES
+
+Programming paradigm based on *lambda calculus* (Alonzo Church)
+
+- /functions/ are *first class* citizens
+  - higher-order functions
+  - partial application
+  - currying
+
+- Functions are *pure*
+  - immutable data: *no state*
+  - encapsulated side effects
+
+- lazy sequences
+
+* Haskell (1990)
+
+#+BEGIN_NOTES
+The original intention was to talk about Python but in reality
+my first real encounter with FP was with Haskell and that's probably
+the main reason why I got interested in it.
+
+Haskell is a relatively old language (same age as Python) but it has
+been for most of its history a niche research language, that people
+used to write papers with.
+
+It's probably until now the most "complete" and pure functional programming
+language out there, and in some ways it's just incredibly beautiful.
+
+This joke here refers to the fact that while there is so much interest in
+Haskell not as many people use it in production, but in any case
+it's still probably the best language to really learn functional programming.
+#+END_NOTES
+
+  - pure
+  - lazy
+  - pattern matching
+  - algebraic data types
+  - type inference
+
+[[./images/haskell.png]]
+
+
+* What you can't do
+
+ - Assignments
+ - Mutable data structures
+ - While/For Loops
+ - Control Over Order of Execution
+ - Side Effects
+
+[[./images/wtf.gif]]
+
+* Python functional Christmas
+
+** Imperative
+
+#+BEGIN_SRC python
+
+#+END_SRC
+
+** OOP 
+
+** Functional
+
+* Functools
+
+* Itertools
+
+* Toolz
+
+* Voluptuous
