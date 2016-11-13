@@ -81,7 +81,11 @@ it's still probably the best language to really learn functional programming.
 
 ** Functional
 
+* Map reduce & co
+
 * Functools
+
+
 
 * Itertools
 
@@ -94,3 +98,5 @@ it's still probably the best language to really learn functional programming.
 ** TODO explain briefly the concept of Monad
 
 ** TODO show an example 
+
+* Hypothesis
