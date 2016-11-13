@@ -88,3 +88,9 @@ it's still probably the best language to really learn functional programming.
 * Toolz
 
 * Voluptuous
+
+* Side effects
+
+** TODO explain briefly the concept of Monad
+
+** TODO show an example 
