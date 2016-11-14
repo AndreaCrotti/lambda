@@ -31,6 +31,19 @@ Programming paradigm based on *lambda calculus* (Alonzo Church)
 
 - lazy sequences
 
+* Why should I bother
+
+- *concurrent* world
+- OOP is doesn't compose well
+- threading is hard and painful
+
+* What's in for me
+
+- easier concurrency
+- better composability
+- easier to write tests
+- more generic abstractions
+
 * Haskell (1990)
 
 #+BEGIN_NOTES
