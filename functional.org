@@ -106,7 +106,32 @@ it's still probably the best language to really learn functional programming.
 
 * Toolz
 
+Toolz provides a suite of functions which have the following functional virtues:
+
+*Composable*: They interoperate due to their use of core data structures.
+*Pure*: They don’t change their inputs or rely on external state.
+*Lazy*: They don’t run until absolutely necessary, allowing them to support large streaming data sets.
+
+** Toolz capabilities
+
+   - *Itertoolz*: extend itertools
+   - *Functoolz*: extend functools
+   - *Dicttoolz*: immutable dictionarie functionality
+
+** Immutable dictionaries
+
+** Currying and partial application
+
+** Iterables
+
+
 * Voluptuous
+
+* Mypy
+
+#+BEGIN_SRC python
+
+#+END_SRC
 
 * Side effects
 
@@ -115,3 +140,11 @@ it's still probably the best language to really learn functional programming.
 ** TODO show an example 
 
 * Hypothesis
+
+* Putting it all together
+
+* Python lacking
+
+- TCO (Tail Call Optimization)
+- Persistent data structures
+- Types
