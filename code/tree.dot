@@ -1,0 +1,9 @@
+digraph christmas_tree {
+        top -> "toy";
+        top -> left;
+        left -> "Ball";
+        left -> "Nothing";
+}
+// Local Variables:
+// compile-command: "dot -T png -o tree.png tree.dot"
+// End:
