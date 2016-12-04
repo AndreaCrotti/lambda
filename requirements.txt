@@ -3,3 +3,4 @@ jupyter==1.0.0
 notebook==4.2.3
 pytest==3.0.4
 toolz==0.8.0
+mypy-lang==0.4.6

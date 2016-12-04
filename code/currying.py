@@ -1,8 +1,11 @@
+import pytest
+
 from toolz import functoolz
 from toolz.curried import pipe, map, filter, get, mapcat
 
 
 def get_gifts(people):
+    # ``pipe(data, f, g, h)`` is equivalent to ``h(g(f(data)))`
     return pipe(people,
         filter(lambda v: v['age'] < 18 and v['well_behaved']),
         mapcat(get(['name'])),
@@ -18,6 +21,18 @@ def get_gifts_classic(people):
     return getting_gifts
 
 
+def uppercase_first_letter_classic(word):
+    return word[0].upper()
+
+
+def uppercase_first_letter_compose(word):
+    comp = functoolz.compose(get(0), lambda c: c.upper())
+    return comp(word)
+    # equivalent to
+    # to_up = lambda c: c.upper()
+    # return to_up(get(0, word))
+
+
 def test_piping():
     people = [
         {'name': 'Bob', 'age': 10, 'well_behaved': True},
@@ -26,3 +41,11 @@ def test_piping():
     ]
     assert get_gifts_classic(people) == ['Bob']
     assert get_gifts(people) == ['Bob']
+
+
+@pytest.mark.parametrize(('inp', 'out'), [
+    ('hello', 'H')
+])
+def test_compose(inp, out):
+    assert uppercase_first_letter_classic(inp) == out
+    assert uppercase_first_letter_compose(inp) == out
