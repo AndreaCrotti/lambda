@@ -21,5 +21,4 @@ instance (Show a) => Show (ChristmasTree a) where
   
 main :: IO ()
 main = do
-  print "Hello world"
   print $ Branch (Leaf "Toy") (Branch (Leaf "Ball") Nil)
