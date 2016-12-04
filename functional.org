@@ -72,6 +72,8 @@ it's still probably the best language to really learn functional programming.
 [[./images/haskell.png]]
 
 
+* Love it or hate it
+
 * What you can't do
 
  - Assignments
