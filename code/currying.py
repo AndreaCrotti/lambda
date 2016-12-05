@@ -26,6 +26,7 @@ def uppercase_first_letter_classic(word):
 
 
 def uppercase_first_letter_compose(word):
+
     comp = functoolz.compose(get(0), lambda c: c.upper())
     return comp(word)
     # equivalent to

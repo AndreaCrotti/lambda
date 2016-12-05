@@ -98,9 +98,9 @@ it's still probably the best language to really learn functional programming.
 
 * Map reduce & co
 
+** No more looping
+
 * Functools
-
-
 
 * Itertools
 
@@ -114,32 +114,115 @@ Toolz provides a suite of functions which have the following functional virtues:
 
 ** Toolz capabilities
 
-   - *Itertoolz*: extend itertools
-   - *Functoolz*: extend functools
-   - *Dicttoolz*: immutable dictionarie functionality
+ - *Itertoolz*: extend itertools
+ - *Functoolz*: extend functools
+ - *Dicttoolz*: immutable dictionarie functionality
 
 ** Immutable dictionaries
 
-** Currying and partial application
+** Function composition
+
+** Partial application
+
+   *Haskell*:
+
+#+BEGIN_SRC haskell
+  my_sum:: Num a => -> a -> a -> a
+  my_sum a b = a + b
+  add_three = my_sum 3
+  
+  add_three 2 == 5
+#+END_SRC
+
+   *Python*:
+
+#+BEGIN_SRC python
+  from toolz.functoolz import partial
+
+  def my_sum(a, b):
+      return a + b
+
+  add_three = partial(my_sum, 3)
+#+END_SRC
+
+** Currying
+
+   *Haskell*:
+#+BEGIN_SRC haskell
+  my_sum:: Num a => -> a -> a -> a
+  my_sum a b = a + b
+
+  Prelude> :t my_sum 1
+  my_sum 1 :: Num a => a -> a
+
+  (my_sum 1) 2 == (my_sum 1 2)
+#+END_SRC
+
+   *Python*:
+
+#+BEGIN_SRC python
+  from toolz.functoolz import curry
+
+  def my_sum(a, b):
+      return a + b
+
+  my_sum(a)(b) == my_sum(a, b)
+#+END_SRC
+
+** Composition
+
+ *Haskell*:
+
+#+BEGIN_SRC haskell
+  import Data.Char (toUpper)
+
+  get_first:: [a] -> a
+  get_first lis = lis !! 0
+
+  upper_first_letter:: [Char] -> Char
+  upper_first_letter = toUpper . get_first
+
+#+END_SRC
+
+ *Python*:
+
+#+BEGIN_SRC python
+  from toolz.functoolz import compose
+  from toolz.curried import get
+
+
+  upcase_first_letter = compose(
+      get(0), # lambda l: l[0]
+      lambda c: c.upper(),
+  )
+
+  upcase_first_letter('hello') == 'hello'[0].upper() == 'H'
+#+END_SRC
 
 ** Iterables
-
-
-* Voluptuous
 
 * Mypy
 
 #+BEGIN_SRC python
-
+  def typed_addition(a: int, b: int) -> int:
+      return a + b
 #+END_SRC
 
 * Side effects
 
-** TODO explain briefly the concept of Monad
+** Pure computation?
 
-** TODO show an example 
+[[./images/haskell.png]]
 
-* Hypothesis
+** Monads to the rescue
+
+** 
+
+* Testing
+
+** Quickcheck
+
+** Hypothesis
 
 * Putting it all together
 
@@ -147,4 +230,4 @@ Toolz provides a suite of functions which have the following functional virtues:
 
 - TCO (Tail Call Optimization)
 - Persistent data structures
-- Types
+- Types?
