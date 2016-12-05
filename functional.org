@@ -37,6 +37,19 @@ Programming paradigm based on *lambda calculus* (Alonzo Church)
 - OOP is doesn't compose well
 - threading is hard and painful
 
+** RIP OOP?
+
+ [[./images/oop_rip.jpg]]
+
+#+begin_quote
+ Object-oriented programming is both anti-modular and
+ anti-parallel by its very nature, and hence unsuitable for a modern CS
+ curriculum.
+
+ Robert Harper (professor at Carniage Mellon University)
+
+ #+end_quote
+
 * What's in for me
 
 - easier concurrency
@@ -266,15 +279,15 @@ Who gets a gift for Christmas??
 
 ** Monads to the rescue
 
-
-
-** Maybe?
+** Call me Maybe
 
 [[./images/maybe.png]]
 
 #+BEGIN_SRC haskell
   data Maybe a = Nothing | Just a
 #+END_SRC
+
+
 
 * Testing
 
@@ -298,6 +311,44 @@ Who gets a gift for Christmas??
 - TCO (Tail Call Optimization)
 - Persistent data structures
 - Types?
+
+* Quotes
+
+** 10 100
+
+ #+BEGIN_QUOTE
+ "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." —Alan Perlis
+ #+END_QUOTE
+   
+** Describing
+
+#+BEGIN_QUOTE
+Functional programming is like describing your problem to a mathematician.
+Imperative programming is like giving instructions to an idiot. - Arcus #scheme
+#+END_QUOTE
+
+** Cloud
+
+#+BEGIN_QUOTE
+  OOP cannot save us from the Cloud Monster anymore. - Ju Gonçalves
+#+END_QUOTE
+
+** Functions
+
+#+BEGIN_QUOTE
+
+Functional Programming is so called because a program consists entirely of functions.
+
+- John Hughes, Why Functional Programming Matters
+
+#+END_QUOTE
+
+** Python FP
+
+#+BEGIN_QUOTE
+using Python for FP it's like looking at a beautiful view through a dirty window - 
+
+#+END_QUOTE
 
 * Resources
 
