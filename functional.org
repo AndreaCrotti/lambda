@@ -261,11 +261,20 @@ Who gets a gift for Christmas??
 
 ** Pure computation?
 
+
 [[./images/haskell.png]]
 
 ** Monads to the rescue
 
-** 
+
+
+** Maybe?
+
+[[./images/maybe.png]]
+
+#+BEGIN_SRC haskell
+  data Maybe a = Nothing | Just a
+#+END_SRC
 
 * Testing
 
@@ -298,3 +307,4 @@ Who gets a gift for Christmas??
 - [[http://learnyouahaskell.com/][Learn You a Haskell for Great Good]]
 - [[https://github.com/pytoolz/toolz][toolz]]
 - [[http://mypy-lang.org/][mypy lang]]
+- [[http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html][functors, applicatives, and monads in pictures]]
