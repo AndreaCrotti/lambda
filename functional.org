@@ -346,7 +346,7 @@ Functional Programming is so called because a program consists entirely of funct
 ** Python FP
 
 #+BEGIN_QUOTE
-using Python for FP it's like looking at a beautiful view through a dirty window - 
+using Python for Functional Programming it's like looking at a beautiful view through a dirty window - 
 
 #+END_QUOTE
 
