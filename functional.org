@@ -69,11 +69,6 @@ it's still probably the best language to really learn functional programming.
   - algebraic data types
   - type inference
 
-[[./images/haskell.png]]
-
-
-* Love it or hate it
-
 * What you can't do
 
  - Assignments
@@ -276,6 +271,15 @@ Who gets a gift for Christmas??
 
 ** Quickcheck
 
+#+BEGIN_SRC haskell
+  import Test.QuickCheck
+
+  prop_revapp :: [Int] -> [Int] -> Bool
+  prop_revapp xs ys = reverse (xs++ys) == reverse xs ++ reverse ys
+
+  main = quickCheck prop_revapp
+#+END_SRC
+
 ** Hypothesis
 
 * Putting it all together
@@ -292,3 +296,5 @@ Who gets a gift for Christmas??
 - [[https://www.youtube.com/watch?v=-6BsiVyC1kM][the value of values]]
 - [[https://www.youtube.com/watch?v=-6BsiVyC1kM][Clojure transducers]]
 - [[http://learnyouahaskell.com/][Learn You a Haskell for Great Good]]
+- [[https://github.com/pytoolz/toolz][toolz]]
+- [[http://mypy-lang.org/][mypy lang]]
