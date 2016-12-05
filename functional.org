@@ -114,13 +114,30 @@ Toolz provides a suite of functions which have the following functional virtues:
 
 ** Toolz capabilities
 
- - *Itertoolz*: extend itertools
+ - *Dicttoolz*: immutable dictionaries functionality
  - *Functoolz*: extend functools
- - *Dicttoolz*: immutable dictionarie functionality
+ - *Itertoolz*: extend itertools
 
 ** Immutable dictionaries
 
-** Function composition
+Problem:
+
+Given 
+
+*** The mutable way:
+
+#+BEGIN_SRC python
+  def enrich_dict_mutable(dic):
+      for key in dic:
+          if key % 2 == 0:
+              dic[key] = 'bar'
+
+      keys_below_zero = [x for x in dic if x < 0]
+      for neg in keys_below_zero:
+          del dic[neg]
+
+      return dic
+#+END_SRC
 
 ** Partial application
 
@@ -199,6 +216,43 @@ Toolz provides a suite of functions which have the following functional virtues:
   upcase_first_letter('hello') == 'hello'[0].upper() == 'H'
 #+END_SRC
 
+** Pipes!
+
+Who gets a gift for Christmas??
+
+#+BEGIN_SRC 
+    people = [
+        {'name': 'Bob', 'age': 10, 'well_behaved': True},
+        {'name': 'Rick', 'age': 10, 'well_behaved': False},
+        {'name': 'John', 'age': 20, 'well_behaved': True},
+    ]
+
+#+END_SRC
+
+*** Classic loopy
+
+#+BEGIN_SRC python
+  def get_gifts_classic(people):
+      getting_gifts = []
+      for person in people:
+          if person['age'] < 18 and person['well_behaved']:
+              getting_gifts.append(person['name'])
+
+      return getting_gifts
+
+#+END_SRC
+
+*** Toolz pipes
+
+#+BEGIN_SRC python
+  def get_gifts(people):
+      # ``pipe(data, f, g, h)`` is equivalent to ``h(g(f(data)))`
+      return pipe(people,
+          filter(lambda v: v['age'] < 18 and v['well_behaved']),
+          mapcat(get(['name'])),
+          list)
+#+END_SRC
+
 ** Iterables
 
 * Mypy
@@ -231,3 +285,10 @@ Toolz provides a suite of functions which have the following functional virtues:
 - TCO (Tail Call Optimization)
 - Persistent data structures
 - Types?
+
+* Resources
+
+- [[http://www.cse.chalmers.se/~rjmh/Papers/whyfp.pdf][Why functional programming matters]]
+- [[https://www.youtube.com/watch?v=-6BsiVyC1kM][the value of values]]
+- [[https://www.youtube.com/watch?v=-6BsiVyC1kM][Clojure transducers]]
+- [[http://learnyouahaskell.com/][Learn You a Haskell for Great Good]]
