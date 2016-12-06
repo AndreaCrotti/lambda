@@ -261,7 +261,25 @@ Who gets a gift for Christmas??
           list)
 #+END_SRC
 
-** Iterables
+** To infinity and beyond
+
+*** Infinite set of even numbers
+
+   *Haskell*:
+   
+#+BEGIN_SRC haskell
+  [x | x <- [0..], x `mod` 2 == 0]
+#+END_SRC
+
+   *Python*:
+
+#+BEGIN_SRC python
+  def evens():
+      ev = 0
+      while True:
+          yield ev
+          ev += 2
+#+END_SRC
 
 * Mypy
 
@@ -286,7 +304,6 @@ Who gets a gift for Christmas??
 #+BEGIN_SRC haskell
   data Maybe a = Nothing | Just a
 #+END_SRC
-
 
 
 * Testing
