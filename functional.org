@@ -305,6 +305,22 @@ Who gets a gift for Christmas??
   data Maybe a = Nothing | Just a
 #+END_SRC
 
+** Monads and Python
+
+#+BEGIN_SRC python
+  from pymonad.Maybe import *
+  from pymonad.List import *
+
+  # 'neg' knows nothing about functor types...
+  def neg(x):
+      return -x
+
+  # ... but that doesn't stop us from using it anyway.
+  neg * Just(9)                 # returns Just(-9)
+  neg * Nothing                 # returns Nothing
+  neg * List(1, 2, 3, 4)        # returns List(-1, -2, -3, -4)
+#+END_SRC
+
 
 * Testing
 
@@ -367,6 +383,9 @@ using Python for Functional Programming it's like looking at a beautiful view th
 
 #+END_QUOTE
 
+* The end
+
+
 * Resources
 
 - [[http://www.cse.chalmers.se/~rjmh/Papers/whyfp.pdf][Why functional programming matters]]
@@ -377,3 +396,8 @@ using Python for Functional Programming it's like looking at a beautiful view th
 - [[http://mypy-lang.org/][mypy lang]]
 - [[http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html][functors, applicatives, and monads in pictures]]
 - [[https://wiki.haskell.org/Tutorials/Programming_Haskell/String_IO][Haskell String IO]]
+
+
+ # Local Variables:
+ # after-save-hook: (org-reveal-export-to-html)
+ # End:
