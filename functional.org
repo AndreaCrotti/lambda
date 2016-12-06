@@ -31,6 +31,9 @@ Programming paradigm based on *lambda calculus* (Alonzo Church)
 
 - lazy sequences
 
+* Lambda calculus
+
+
 * Why should I bother
 
 - *concurrent* world
