@@ -279,6 +279,21 @@ Who gets a gift for Christmas??
       while True:
           yield ev
           ev += 2
+
+
+  gen_ev = evens()
+  for n in range(10):
+      print(next(gen_ev))
+#+END_SRC
+
+    *Smarter Python*:
+    
+#+BEGIN_SRC python
+  from itertools import count
+  from toolz.itertoolz import take
+
+  for ev in take(10, count(0, 2)):
+      print(ev)
 #+END_SRC
 
 * Mypy
