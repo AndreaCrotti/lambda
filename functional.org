@@ -6,12 +6,6 @@
 #+EMAIL: andrea.crotti.0@gmail.com
 #+TOC: listings
 
-* Abstract
-
-This talk will be a journey in the world of functional programming, starting from its origin to the current days.
-
-After an introduction and a bit of theory we will talk about how to do functional programming in Python and what are the advantages.
-
 * What?
 
 #+BEGIN_NOTES
@@ -39,6 +33,7 @@ Programming paradigm based on *lambda calculus* (Alonzo Church)
 - *concurrent* world
 - OOP is doesn't compose well
 - threading is hard and painful
+- it's here to stay
 
 ** RIP OOP?
 
@@ -84,6 +79,8 @@ it's still probably the best language to really learn functional programming.
   - pattern matching
   - algebraic data types
   - type inference
+
+./images/haskell.png]]
 
 * What you can't do
 
