@@ -430,6 +430,9 @@ using Python for Functional Programming it's like looking at a beautiful view th
 - [[http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html][functors, applicatives, and monads in pictures]]
 - [[https://wiki.haskell.org/Tutorials/Programming_Haskell/String_IO][Haskell String IO]]
 - [[https://github.com/tobgu/pyrsistent][pyrsistent, persistent data structures in Python]]
+- [[http://coconut-lang.org/][Coconut lang]]
+- [[https://github.com/kachayev/fn.py][fn.py library]]
+- [[https://github.com/Suor/funcy][funcy Python library]]
 
 
  # Local Variables:
