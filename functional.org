@@ -6,6 +6,22 @@
 #+EMAIL: andrea.crotti.0@gmail.com
 #+TOC: listings
 
+* Functional programming
+  :PROPERTIES:
+  :reveal_background: ./images/cat_balls.gif
+  :END:
+
+* Overview
+
+- A bit of history
+- Haskell
+- Python snippets using:
+  - toolz
+  - functools
+  - itertools
+  - mypy
+  - hypothesis
+
 * What?
 
 #+BEGIN_NOTES
@@ -93,7 +109,10 @@ it's still probably the best language to really learn functional programming.
  - Have control Over Order of Execution
  - Side Effects
 
-[[./images/wtf.gif]]
+** Really?
+   :PROPERTIES:
+   :reveal_background: ./images/wtf.gif
+   :END:
 
 * Map reduce & co
 
@@ -254,6 +273,18 @@ Who gets a gift for Christmas??
           list)
 #+END_SRC
 
+*** Clojure/Elixir
+
+#+BEGIN_SRC clojure
+
+  (-> "hello"
+      )
+#+END_SRC
+
+#+BEGIN_SRC elixir
+  String.reverse(String.capitalize("philip"))
+#+END_SRC
+
 ** To infinity and beyond
 
 *** Infinite set of even numbers
@@ -346,12 +377,6 @@ Who gets a gift for Christmas??
 
 * Putting it all together
 
-* Python lacking
-
-- TCO (Tail Call Optimization)
-- Persistent data structures
-- Types?
-
 * Quotes
 
 ** 10 100
@@ -390,7 +415,8 @@ using Python for Functional Programming it's like looking at a beautiful view th
 
 #+END_QUOTE
 
-* The end
+* Conclusion
+
 
 
 * Resources
