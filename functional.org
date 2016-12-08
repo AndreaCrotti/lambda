@@ -27,6 +27,7 @@ Programming paradigm based on *lambda calculus* (Alonzo Church)
 
 * Lambda calculus
 
+# TODO: insert some examples of beta/eta reductions, and maybe the numerals
 
 * Why should I bother
 
@@ -47,6 +48,8 @@ Programming paradigm based on *lambda calculus* (Alonzo Church)
  Robert Harper (professor at Carniage Mellon University)
 
  #+end_quote
+
+* Why is it so hard?
 
 * What's in for me
 
@@ -87,22 +90,10 @@ it's still probably the best language to really learn functional programming.
  - Assignments
  - Mutable data structures
  - While/For Loops
- - Control Over Order of Execution
+ - Have control Over Order of Execution
  - Side Effects
 
 [[./images/wtf.gif]]
-
-* Python functional Christmas
-
-** Imperative
-
-#+BEGIN_SRC python
-
-#+END_SRC
-
-** OOP 
-
-** Functional
 
 * Map reduce & co
 
@@ -146,6 +137,8 @@ Given
 
       return dic
 #+END_SRC
+
+*** Go immutable
 
 ** Partial application
 
@@ -336,7 +329,6 @@ Who gets a gift for Christmas??
   neg * List(1, 2, 3, 4)        # returns List(-1, -2, -3, -4)
 #+END_SRC
 
-
 * Testing
 
 ** Quickcheck
@@ -364,9 +356,9 @@ Who gets a gift for Christmas??
 
 ** 10 100
 
- #+BEGIN_QUOTE
- "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." —Alan Perlis
- #+END_QUOTE
+#+BEGIN_QUOTE
+"It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." —Alan Perlis
+#+END_QUOTE
    
 ** Describing
 
@@ -411,6 +403,7 @@ using Python for Functional Programming it's like looking at a beautiful view th
 - [[http://mypy-lang.org/][mypy lang]]
 - [[http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html][functors, applicatives, and monads in pictures]]
 - [[https://wiki.haskell.org/Tutorials/Programming_Haskell/String_IO][Haskell String IO]]
+- [[https://github.com/tobgu/pyrsistent][pyrsistent, persistent data structures in Python]]
 
 
  # Local Variables:
