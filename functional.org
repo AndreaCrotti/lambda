@@ -1,4 +1,5 @@
 #+AUTHOR: Andrea Crotti
+#+AUTHOR_EMAIL: andrea.crotti.0@gmail.com
 #+TITLE: Functional Christmas Programming
 #+OPTIONS: num:nil toc:nil ^:nil tex:t reveal_progress:t reveal_control:t reveal_overview:t
 #+REVEAL_TRANS: none
@@ -105,7 +106,7 @@ it's still probably the best language to really learn functional programming.
   - algebraic data types
   - type inference
 
-./images/haskell.png]]
+[[./images/haskell.png]]
 
 * What you can't do
 
@@ -120,6 +121,15 @@ it's still probably the best language to really learn functional programming.
    :reveal_background: ./images/wtf.gif
    :END:
 
+* Four pillars
+
+#+ATTR_REVEAL: :frag (appear)
+
+  * Functions
+  * Immutability
+  * Streams
+  * Side effects
+
 * What's in a function
 
 ** Def and Lambda
@@ -130,7 +140,11 @@ it's still probably the best language to really learn functional programming.
 
   adder_lambda = lambda a, b: a + b
 
-  type(adder) == type(adder_lambda) == function
+  adder(1, 2) # -> 3
+  adder_lambda(1, 2) # -> 3
+
+  type(adder) == type(adder_lambda) == function # -> True
+
 #+END_SRC
 
 ** Class?
