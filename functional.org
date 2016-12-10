@@ -1,28 +1,66 @@
-#+AUTHOR: Andrea Crotti
-#+AUTHOR_EMAIL: andrea.crotti.0@gmail.com
-#+TITLE: Functional Christmas Programming
+#+AUTHOR: Andrea Crotti (@andreacrotti)
+#+TITLE: Functional Programming, Christmas edition
 #+OPTIONS: num:nil toc:nil ^:nil tex:t reveal_progress:t reveal_control:t reveal_overview:t
 #+REVEAL_TRANS: none
 #+REVEAL_SPEED: fast
 #+REVEAL_HLEVEL: 1
-#+EMAIL: andrea.crotti.0@gmail.com
+#+EMAIL: andreacrotti
 #+TOC: listings
-
-* Functional programming
-  :PROPERTIES:
-  :reveal_background: ./images/cat_balls.gif
-  :END:
 
 * Overview
 
-- A bit of history
-- Haskell
-- Python snippets using:
-  - toolz
-  - functools
-  - itertools
-  - mypy
-  - hypothesis
+#+BEGIN_NOTES
+Welcome all and thanks for coming.
+Today we are going to talk about functional programming, (so if you are in the wrong room please run now).
+We'll first see a bit of history, give an overview of probably the most iconic functional programming language,
+and finally get to the juicy part, how do we actually do it in Python and why.
+
+I have a lot of material so sorry in advance if I might go a bit too fast, all the material will be fully
+availabe and I'll share everything with you as soon as the talk is done.
+#+END_NOTES
+
+#+ATTR_REVEAL: :frag (appear)
+
+  * A bit of history
+  * Brief introduction to Haskell
+  * Functional patterns in Python/Haskell
+
+* History
+** First there was lambda calculus
+
+#+BEGIN_QUOTE
+*Turing complete, universal* model of computation that can be used to simulate any single-taped Turing machine.
+#+END_QUOTE
+
+First introduced in *1930* by Alonzo Church, and based on:
+
+- function abstraction
+- variable binding and substitution
+
+** Lambda calculus primer
+
+Sample function definitions:
+#+ATTR_REVEAL: :frag (appear)
+  * $\lambda x. x$
+  * $\lambda x y. x$
+  * $\lambda x. \lambda y. x$
+
+
+** Sample reduction
+#+ATTR_REVEAL: :frag (appear)
+  * Assuming these definitions:
+  * True: $\lambda x.\lambda y. x$
+  * False: $\lambda x.\lambda y. y$
+  * And: $\lambda p. \lambda q. p q p$
+  * Let's prove that *True And False == False*:
+  * $(\lambda p. \lambda q. p q p) (\lambda x.\lambda y. x) (\lambda x.\lambda y. y)$
+  * $\beta \rightarrow (\lambda q. (\lambda x. \lambda y. x) q (\lambda x. \lambda y. x)) (\lambda x.\lambda y. y)$
+  * $\beta \rightarrow (\lambda x. \lambda y. x) (\lambda x.\lambda y. y) (\lambda x.\lambda y. x)$
+  * $\beta \rightarrow (\lambda x. \lambda y. y)$
+  * *BINGO*
+
+** Noone doing it
+
 
 * What?
 
@@ -48,9 +86,6 @@ Programming paradigm based on *lambda calculus* (Alonzo Church)
    :reveal_background: ./images/wtf.gif
    :END:
 
-* Lambda calculus
-
-# TODO: insert some examples of beta/eta reductions, and maybe the numerals
 
 * Why should I bother
 
@@ -123,14 +158,47 @@ it's still probably the best language to really learn functional programming.
 
 * Four pillars
 
+#+BEGIN_NOTES
+Now we are going to see more in detail four concepts from functional programming,
+and exploring them in Python and Haskell, comparing the two together.
+
+The first pillar is function and function composition, so what functions actually are,
+what are their propreties and how do we compose them.
+The second is immutability, which is simply the idea of trying to never mutate your
+data in place, but always create new objects for every mutation.
+
+Streaming refers to the ability to work on infinite infinite sequences, and finally
+purity refers to the absence of side effects.
+#+END_NOTES
+
 #+ATTR_REVEAL: :frag (appear)
 
-  * Functions
-  * Immutability
-  * Streams
-  * Side effects
+  * Function composition (toolz/stdlib)
+  * Immutability (toolz)
+  * Streaming (itertools/toolz)
+  * Purity?
+  * Types (mypy/voluptuous?)
+  * Pattern matching ?
 
-* What's in a function
+# TODO remove libraries from here if already mentioning them above
+Libraries used:
+#+ATTR_REVEAL: :frag (appear)
+  * itertools
+  * functools
+  * toolz
+  * fn.py
+  * mypy
+
+* What's a function, really
+
+** Mathematical definition
+
+#+BEGIN_QUOTE
+A function is a relation between a set of inputs and a set of permissible outputs
+with the property that each input is related to exactly one output. 
+#+END_QUOTE
+
+[[./images/function.png]]
 
 ** Def and Lambda
 
@@ -497,7 +565,6 @@ using Python for Functional Programming it's like looking at a beautiful view th
 * Conclusion
 
 
-
 * Resources
 
 - [[http://www.cse.chalmers.se/~rjmh/Papers/whyfp.pdf][Why functional programming matters]]
@@ -512,7 +579,7 @@ using Python for Functional Programming it's like looking at a beautiful view th
 - [[http://coconut-lang.org/][Coconut lang]]
 - [[https://github.com/kachayev/fn.py][fn.py library]]
 - [[https://github.com/Suor/funcy][funcy Python library]]
-
+- [[http://people.eecs.berkeley.edu/~gongliang13/lambda/][lambda calculus interpreter]]
 
  # Local Variables:
  # after-save-hook: (org-reveal-export-to-html)
