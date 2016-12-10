@@ -1,8 +1,9 @@
 #+AUTHOR: Andrea Crotti
 #+TITLE: Functional Christmas Programming
-#+OPTIONS: num:nil ^:nil tex:t toc:nil reveal_progress:t reveal_control:t reveal_overview:t
-#+REVEAL_TRANS: fade
+#+OPTIONS: num:nil toc:nil ^:nil tex:t reveal_progress:t reveal_control:t reveal_overview:t
+#+REVEAL_TRANS: none
 #+REVEAL_SPEED: fast
+#+REVEAL_HLEVEL: 1
 #+EMAIL: andrea.crotti.0@gmail.com
 #+TOC: listings
 
@@ -113,6 +114,55 @@ it's still probably the best language to really learn functional programming.
    :PROPERTIES:
    :reveal_background: ./images/wtf.gif
    :END:
+
+* What's in a function
+
+** Def and Lambda
+
+#+BEGIN_SRC python
+  def adder(a, b):
+      return a + b
+
+  adder_lambda = lambda a, b: a + b
+
+  type(adder) == type(adder_lambda) == function
+#+END_SRC
+
+** Callable class
+
+
+   
+#+BEGIN_SRC python
+  class adder:
+      def __call__(self, a, b):
+          return a + b
+
+  adder(1, 2)
+#+END_SRC
+
+** Other functions?
+
+#+ATTR_REVEAL: :frag (appear)
+  * Let's define a method and call it:
+    #+BEGIN_SRC python
+      class Santa:
+          def give_gift(self, kid, gift):
+              print("Good boy {}, here is your {}".format(kid, gift))
+    
+      my_santa = Santa()
+      my_santa.give_gift('boy', 'toy') # -> Good boy boy, here is your toy
+    #+END_SRC
+
+  * What is actually give_gift?
+    #+BEGIN_SRC python
+      type(Santa.give_gift) # -> function
+    #+END_SRC
+
+  * So we can just do this instead:
+    #+BEGIN_SRC python
+      my_santa = Santa()
+      Santa.give_gift(my_santa, 'boy', 'toy') # -> Good boy boy, here is your toy
+    #+END_SRC
 
 * Map reduce & co
 
