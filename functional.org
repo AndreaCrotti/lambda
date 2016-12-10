@@ -42,6 +42,11 @@ Programming paradigm based on *lambda calculus* (Alonzo Church)
 
 - lazy sequences
 
+** What if
+   :PROPERTIES:
+   :reveal_background: ./images/wtf.gif
+   :END:
+
 * Lambda calculus
 
 # TODO: insert some examples of beta/eta reductions, and maybe the numerals
@@ -128,17 +133,27 @@ it's still probably the best language to really learn functional programming.
   type(adder) == type(adder_lambda) == function
 #+END_SRC
 
-** Callable class
+** Class?
 
-
+#+ATTR_REVEAL: :frag (appear)
+  * Callable class
    
-#+BEGIN_SRC python
-  class adder:
-      def __call__(self, a, b):
-          return a + b
+    #+BEGIN_SRC python
+      class Adder:
+          def __call__(self, a, b):
+              return a + b
 
-  adder(1, 2)
-#+END_SRC
+      my_adder = Adder()
+      type(my_adder) # Adder
+      my_adder(1, 2) # -> 3
+    #+END_SRC
+
+  * Generic callable interface
+    
+    #+BEGIN_SRC python
+      callable(adder)   # -> true
+      callable(my_adder) # -> true
+    #+END_SRC
 
 ** Other functions?
 
