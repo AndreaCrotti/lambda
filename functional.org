@@ -20,10 +20,39 @@ availabe and I'll share everything with you as soon as the talk is done.
 #+END_NOTES
 
 #+ATTR_REVEAL: :frag (appear)
-
+ 
+  * Why functional programming matters
   * A bit of history
   * Brief introduction to Haskell
   * Functional patterns in Python/Haskell
+
+* Why
+  :PROPERTIES:
+  :reveal_background: ./images/cat_liying.gif
+  :reveal_background_size: 800px
+  :END:
+
+** Concurrency
+
+** Abstraction
+
+** Immutability
+
+** OOP failure
+
+ [[./images/oop_rip.jpg]]
+
+#+begin_quote
+ Object-oriented programming is both anti-modular and
+ anti-parallel by its very nature, and hence unsuitable for a modern CS
+ curriculum.
+
+ Robert Harper (professor at Carniage Mellon University)
+
+ #+end_quote
+
+
+** Who is doing it
 
 * History
 ** First there was lambda calculus
@@ -44,7 +73,6 @@ Sample function definitions:
   * $\lambda x. x$
   * $\lambda x y. x$
   * $\lambda x. \lambda y. x$
-
 
 ** Sample reduction
 #+ATTR_REVEAL: :frag (appear)
@@ -84,30 +112,8 @@ Programming paradigm based on *lambda calculus* (Alonzo Church)
 ** What if
    :PROPERTIES:
    :reveal_background: ./images/what_if_functional.jpg
+   :reveal_background_size: 800px
    :END:
-
-
-* Why should I bother
-
-- *concurrent* world
-- OOP is doesn't compose well
-- threading is hard and painful
-- it's here to stay
-
-** RIP OOP?
-
- [[./images/oop_rip.jpg]]
-
-#+begin_quote
- Object-oriented programming is both anti-modular and
- anti-parallel by its very nature, and hence unsuitable for a modern CS
- curriculum.
-
- Robert Harper (professor at Carniage Mellon University)
-
- #+end_quote
-
-* Why is it so hard?
 
 * What's in for me
 
@@ -579,6 +585,7 @@ using Python for Functional Programming it's like looking at a beautiful view th
 - [[https://github.com/kachayev/fn.py][fn.py library]]
 - [[https://github.com/Suor/funcy][funcy Python library]]
 - [[http://people.eecs.berkeley.edu/~gongliang13/lambda/][lambda calculus interpreter]]
+- [[https://medium.com/@FunctionalWorks/the-rise-of-frontend-functional-languages-c073bd8ea8ed#.yualxlz77][rise of functional programming on the frontend]]
 
  # Local Variables:
  # after-save-hook: (org-reveal-export-to-html)
