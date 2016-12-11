@@ -83,7 +83,7 @@ Programming paradigm based on *lambda calculus* (Alonzo Church)
 
 ** What if
    :PROPERTIES:
-   :reveal_background: ./images/wtf.gif
+   :reveal_background: ./images/what_if_functional.jpg
    :END:
 
 
@@ -261,13 +261,6 @@ with the property that each input is related to exactly one output.
       Santa.give_gift(my_santa, 'boy', 'toy') # -> Good boy boy, here is your toy
     #+END_SRC
 
-* Map reduce & co
-
-** No more looping
-
-* Functools
-
-* Itertools
 
 * Toolz
 
@@ -283,13 +276,12 @@ Toolz provides a suite of functions which have the following functional virtues:
  - *Functoolz*: extend functools
  - *Itertoolz*: extend itertools
 
-** Immutable dictionaries
+* Immutability
+   :PROPERTIES:
+   :reveal_background: ./images/cat_boxing.gif
+   :END:
 
-Problem:
-
-Given 
-
-*** The mutable way:
+** The mutable way:
 
 #+BEGIN_SRC python
   def enrich_dict_mutable(dic):
@@ -304,8 +296,10 @@ Given
       return dic
 #+END_SRC
 
-*** Go immutable
+** Go immutable
 
+
+* Function composition
 ** Partial application
 
    *Haskell*:
@@ -432,6 +426,8 @@ Who gets a gift for Christmas??
   String.reverse(String.capitalize("philip"))
 #+END_SRC
 
+
+* Streaming
 ** To infinity and beyond
 
 *** Infinite set of even numbers
@@ -467,12 +463,15 @@ Who gets a gift for Christmas??
       print(ev)
 #+END_SRC
 
-* Mypy
 
-#+BEGIN_SRC python
-  def typed_addition(a: int, b: int) -> int:
-      return a + b
-#+END_SRC
+* Types
+** Mypy
+
+ #+BEGIN_SRC python
+   def typed_addition(a: int, b: int) -> int:
+       return a + b
+ #+END_SRC
+
 
 * Side effects
 
