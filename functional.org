@@ -4,7 +4,6 @@
 #+REVEAL_TRANS: none
 #+REVEAL_SPEED: fast
 #+REVEAL_HLEVEL: 1
-#+EMAIL: andreacrotti
 #+TOC: listings
 
 * Overview
@@ -52,8 +51,16 @@ availabe and I'll share everything with you as soon as the talk is done.
  #+end_quote
 
 
-** Who is doing it
+** Functional languages
 
+- Haskell
+- Lisp
+- Clojure
+- Erlang
+- Elixir
+- Scala
+- Elm
+  
 * History
   :PROPERTIES:
   :reveal_background: ./images/cat_bed.gif
