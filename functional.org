@@ -55,6 +55,12 @@ availabe and I'll share everything with you as soon as the talk is done.
 ** Who is doing it
 
 * History
+  :PROPERTIES:
+  :reveal_background: ./images/cat_bed.gif
+  :reveal_background_size: 800px
+  :END:
+
+
 ** First there was lambda calculus
 
 #+BEGIN_QUOTE
