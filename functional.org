@@ -20,53 +20,16 @@ availabe and I'll share everything with you as soon as the talk is done.
 
 #+ATTR_REVEAL: :frag (appear)
  
-  * Why functional programming matters
   * A bit of history
+  * Why functional programming matters
   * Brief introduction to Haskell
   * Functional patterns in Python/Haskell
-
-* Why
-  :PROPERTIES:
-  :reveal_background: ./images/cat_liying.gif
-  :reveal_background_size: 800px
-  :END:
-
-** Concurrency
-
-** Abstraction
-
-** Immutability
-
-** OOP failure
-
- [[./images/oop_rip.jpg]]
-
-#+begin_quote
- Object-oriented programming is both anti-modular and
- anti-parallel by its very nature, and hence unsuitable for a modern CS
- curriculum.
-
- Robert Harper (professor at Carniage Mellon University)
-
- #+end_quote
-
-
-** Functional languages
-
-- Haskell
-- Lisp
-- Clojure
-- Erlang
-- Elixir
-- Scala
-- Elm
   
 * History
   :PROPERTIES:
   :reveal_background: ./images/cat_bed.gif
   :reveal_background_size: 800px
   :END:
-
 
 ** First there was lambda calculus
 
@@ -101,6 +64,42 @@ Sample function definitions:
   * *BINGO*
 
 ** Noone doing it
+* Why
+  :PROPERTIES:
+  :reveal_background: ./images/cat_liying.gif
+  :reveal_background_size: 800px
+  :END:
+
+** Concurrency
+  :PROPERTIES:
+  :reveal_background: ./images/multicore.gif
+  :reveal_background_size: 800px
+  :END:
+
+** Immutability
+
+** OOP failure
+
+ [[./images/oop_rip.jpg]]
+
+#+begin_quote
+ Object-oriented programming is both anti-modular and
+ anti-parallel by its very nature, and hence unsuitable for a modern CS
+ curriculum.
+
+ Robert Harper (professor at Carniage Mellon University)
+
+ #+end_quote
+
+** Functional languages
+
+- Haskell
+- Lisp
+- Clojure
+- Erlang
+- Elixir
+- Scala
+- Elm
 
 
 * What?
