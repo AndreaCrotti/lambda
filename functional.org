@@ -601,6 +601,8 @@ using Python for Functional Programming it's like looking at a beautiful view th
 - [[https://medium.com/@FunctionalWorks/the-rise-of-frontend-functional-languages-c073bd8ea8ed#.yualxlz77][rise of functional programming on the frontend]]
 - [[https://www.wiki.ed.ac.uk/display/SAPMW/2015/02/23/The+Rise+Of+Functional+Programming+In+Industry][rise of functional programming in the industry]]
 - [[https://code.facebook.com/posts/745068642270222/fighting-spam-with-haskell/][fighting spam with Haskell]]
+- [[https://www.quora.com/Which-universities-teach-their-first-CS-course-in-a-functional-programming-language][universities using FP in the first courses]]
+- [[http://haskell-servant.readthedocs.io/en/stable/introduction.html][Haskell Servant introduction]]
 
  # Local Variables:
  # after-save-hook: (org-reveal-export-to-html)
