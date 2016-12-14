@@ -422,6 +422,35 @@ with the property that each input is related to exactly one output.
    :END:
 
 * Function composition
+** Higher order functions
+#+BEGIN_QUOTE
+A higher-order function is a function that either takes one or more
+functions as arguments or returns a function as its result (or both).
+#+END_QUOTE
+
+*** Map!
+#+ATTR_REVEAL: :frag (appear)
+  * Haskell:
+
+    #+BEGIN_SRC haskell
+      my_map :: (a -> b) -> [a] -> [b]
+      my_map f (x:xs) = [f x] ++ (map f xs)
+
+      my_map (* 2) [1, 2, 3] -- [2, 3, 6]
+    #+END_SRC
+
+  * Python
+    
+    #+BEGIN_SRC python
+      def my_map(f, lis):
+          if lis == []:
+              return []
+          else:
+              return [f(lis[0])] + my_map(f, lis[1:])
+
+      my_map(lambda x: x + 2, [1, 2, 3]) # [2, 4, 6]
+    #+END_SRC
+
 ** Partial application
 #+BEGIN_QUOTE
 Partial application (or partial function application) refers to the
