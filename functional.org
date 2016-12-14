@@ -31,7 +31,6 @@ I can't claim to be an expert though, I still have lots to learn, but I'm defini
 #+END_NOTES
 
 #+ATTR_REVEAL: :frag (appear)
- 
   * A bit of history
   * Why functional programming matters
   * Brief introduction to Haskell
@@ -84,9 +83,9 @@ that is able to define all possible valid programs.
 
 #+ATTR_REVEAL: :frag (appear)
   - function definitions
-    * $\lambda x. x$
-    * $\lambda x y. x$
-    * $\lambda x. \lambda y. x$
+    * \lambda x. x
+    * \lambda x y. x
+    * \lambda x. \lambda y. x
 
   - Reduction rules
     * \alpha reduction (renaming)
@@ -149,7 +148,7 @@ constructor: \rightarrow that builds function types.
 
 For every type \tau:
 
-(identity function) $\lambda x:\tau . x: \tau \rightarrow \tau$
+(identity function) \lambda x:\tau . x: \tau \rightarrow \tau
 
 Foundation to ML and Haskell (1990):
 #+BEGIN_SRC haskell
@@ -517,9 +516,9 @@ Function composition is the pointwise application of one function to
 the result of another to produce a third function.
 #+END_QUOTE
 
-- $f: X \rightarrow Y$ and $g: Y \rightarrow Z$
-- $f . g: X \rightarrow Z$
-- $(f . g) 2 \equiv f(g(2))$
+- f: X \rightarrow Y and g: Y \rightarrow Z
+- f . g: X \rightarrow Z
+- (f . g) 2 \equiv f(g(2))
 
 *** Composition
 #+ATTR_REVEAL: :frag (appear)
@@ -710,7 +709,6 @@ Who gets a gift for Christmas??
 
 * Conclusion
 #+ATTR_REVEAL: :frag (appear)
-
   * Try Haskell/Clojure/Scala/whatever
   * Use simple data structures
   * Go immutable
