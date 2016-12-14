@@ -5,6 +5,12 @@
 #+REVEAL_SPEED: fast
 #+REVEAL_HLEVEL: 1
 #+TOC: listings
+  
+* 
+  :PROPERTIES:
+  :reveal_background: ./images/what_if_functional.jpg
+  :reveal_background_size: 800px
+  :END:
 
 * Overview
 
@@ -30,12 +36,6 @@ I can't claim to be an expert though, I still have lots to learn, but I'm defini
   * Why functional programming matters
   * Brief introduction to Haskell
   * Functional patterns in Python/Haskell
-  
-* What if
-  :PROPERTIES:
-  :reveal_background: ./images/what_if_functional.jpg
-  :reveal_background_size: 800px
-  :END:
 
 * History
 
@@ -188,7 +188,7 @@ Even java added lambdas to the core language...
  * (ImmutableJS)
 
 
-* Christmas break 1
+* Christmas break #1
   :PROPERTIES:
   :reveal_background: ./images/cat_bed.gif
   # :reveal_background_size: 800px
@@ -256,6 +256,12 @@ these principles are quite general.
 We are going to see very soon examples of all these concepts in both Haskell and Python.
 #+END_NOTES
 
+#+BEGIN_QUOTE
+
+Functional Programming is so called because a program consists entirely of functions.
+- John Hughes, Why Functional Programming Matters
+#+END_QUOTE
+
 #+ATTR_REVEAL: :frag (appear)
   - Functions are *first class* citizens: higher-order, partial application, currying..
   - Data is immutable
@@ -287,26 +293,41 @@ We are going to see very soon examples of all these concepts in both Haskell and
    - algebraic data types
    - type inference
 
-#+BEGIN_SRC haskell
-  fib 0 = 1
-  fib 1 = 1
-  fib n = fib (n - 1) + fib (n - 2)
+** Haskell crash course
+#+ATTR_REVEAL: :frag (appear)
+ * fibonacci
+   #+BEGIN_SRC haskell
+     fib 0 = 1
+     fib 1 = 1
+     fib n = fib (n - 1) + fib (n - 2)
+   #+END_SRC
+  
+ * Algebraic Data Types
+   #+BEGIN_SRC haskell
+     data ChristmasTree a = Nil
+       | Leaf a
+       | Branch (ChristmasTree a) (ChristmasTree a)
+       deriving (Eq, Ord, Read)
+   #+END_SRC
 
-#+END_SRC
+ * Infinite list even numbers
+    #+BEGIN_SRC haskell
+      all_evens = [x | x <- [0..], x `mod` 2 == 0]
+      take 10 all_evens -- [0,2,4,6,8,10,12,14,16,18]
+      drop 10 $ take 10 all_evens -- [20,22,24,26,28,30,32,34,36,38]
+    #+END_SRC
 
-#+RESULTS:
-
-
-* Christmas break 2
+* Christmas break #2
   :PROPERTIES:
   :reveal_background: ./images/cat_liying.gif
-  :reveal_background_size: 800px
   :END:
 
 * FP in practice
 
 #+BEGIN_NOTES
-
+Now that I hope we have a more clear idea about what is functional programming we are
+going to see some examples of the various concepts we talked about in Python, comparing
+them with the haskell equivalent.
 #+END_NOTES
 
 #+ATTR_REVEAL: :frag (appear)
@@ -325,27 +346,34 @@ A function is a relation between a set of inputs and a set of permissible output
 with the property that each input is related to exactly one output. 
 #+END_QUOTE
 
-[[./images/function.png]]
+[[./images/f_x.gif]]
 
 ** Def and Lambda
 
-#+BEGIN_SRC python
-  def adder(a, b):
-      return a + b
+#+ATTR_REVEAL: :frag (appear)
+ * def
+   #+BEGIN_SRC python
+     def adder(a, b):
+         return a + b
 
-  adder_lambda = lambda a, b: a + b
+     adder(1, 2) # -> 3
+   #+END_SRC
 
-  adder(1, 2) # -> 3
-  adder_lambda(1, 2) # -> 3
+ * lambda
+  #+BEGIN_SRC python
+    adder_lambda = lambda a, b: a + b
+    adder_lambda(1, 2) # -> 3
+  #+END_SRC
 
-  type(adder) == type(adder_lambda) == function # -> True
-
-#+END_SRC
+ * types
+   #+BEGIN_SRC python
+     type(adder) == type(adder_lambda) == function # -> True
+   #+END_SRC
 
 ** Class?
 
 #+ATTR_REVEAL: :frag (appear)
-  * Callable class
+  * Callable instance
    
     #+BEGIN_SRC python
       class Adder:
@@ -353,15 +381,15 @@ with the property that each input is related to exactly one output.
               return a + b
 
       my_adder = Adder()
-      type(my_adder) # Adder
       my_adder(1, 2) # -> 3
     #+END_SRC
 
   * Generic callable interface
     
     #+BEGIN_SRC python
-      callable(adder)   # -> true
-      callable(my_adder) # -> true
+      type(adder) == function # -> False
+      callable(adder)   # -> True
+      callable(my_adder) # -> True
     #+END_SRC
 
 ** Other functions?
@@ -386,121 +414,90 @@ with the property that each input is related to exactly one output.
     #+BEGIN_SRC python
       my_santa = Santa()
       Santa.give_gift(my_santa, 'boy', 'toy') # -> Good boy boy, here is your toy
+
+      give_gift = lambda santa, boy, toy: santa.give_gift(santa, boy, toy)
     #+END_SRC
 
-* Toolz
-
-Toolz provides a suite of functions which have the following functional virtues:
-
-*Composable*: They interoperate due to their use of core data structures.
-*Pure*: They don’t change their inputs or rely on external state.
-*Lazy*: They don’t run until absolutely necessary, allowing them to support large streaming data sets.
-
-** Toolz capabilities
-
- - *Dicttoolz*: immutable dictionaries functionality
- - *Functoolz*: extend functools
- - *Itertoolz*: extend itertools
-
-* Immutability
+* Christmas break #3
    :PROPERTIES:
    :reveal_background: ./images/cat_boxing.gif
    :END:
 
-** The mutable way:
-
-#+BEGIN_SRC python
-  def enrich_dict_mutable(dic):
-      for key in dic:
-          if key % 2 == 0:
-              dic[key] = 'bar'
-
-      keys_below_zero = [x for x in dic if x < 0]
-      for neg in keys_below_zero:
-          del dic[neg]
-
-      return dic
-#+END_SRC
-
-** Go immutable
-
 * Function composition
 ** Partial application
 
-   *Haskell*:
+#+ATTR_REVEAL: :frag (appear)
+ * Haskell:
+   #+BEGIN_SRC haskell
+     my_sum:: Num a => -> a -> a -> a
+     my_sum a b = a + b
+     add_three = my_sum 3
+     
+     add_three 2 == 5
+   #+END_SRC
 
-#+BEGIN_SRC haskell
-  my_sum:: Num a => -> a -> a -> a
-  my_sum a b = a + b
-  add_three = my_sum 3
-  
-  add_three 2 == 5
-#+END_SRC
-
-   *Python*:
-
-#+BEGIN_SRC python
-  from toolz.functoolz import partial
-
-  def my_sum(a, b):
-      return a + b
-
-  add_three = partial(my_sum, 3)
-#+END_SRC
+ * Python:
+   #+BEGIN_SRC python
+     from toolz.functoolz import partial
+   
+     def my_sum(a, b):
+         return a + b
+   
+     add_three = partial(my_sum, 3)
+   #+END_SRC
 
 ** Currying
+#+ATTR_REVEAL: :frag (appear)
+   * Haskell:
+     #+BEGIN_SRC haskell
+       my_sum:: Num a => -> a -> a -> a
+       my_sum a b = a + b
 
-   *Haskell*:
-#+BEGIN_SRC haskell
-  my_sum:: Num a => -> a -> a -> a
-  my_sum a b = a + b
+       -- my_sum 1 :: Num a => a -> a
 
-  Prelude> :t my_sum 1
-  my_sum 1 :: Num a => a -> a
+       (my_sum 1) 2 == (my_sum 1 2) == 3
+     #+END_SRC
 
-  (my_sum 1) 2 == (my_sum 1 2)
-#+END_SRC
+   * Python:
 
-   *Python*:
+    #+BEGIN_SRC python
+      from toolz.functoolz import curry
 
-#+BEGIN_SRC python
-  from toolz.functoolz import curry
+      def my_sum(a, b):
+          return a + b
 
-  def my_sum(a, b):
-      return a + b
-
-  my_sum(a)(b) == my_sum(a, b)
-#+END_SRC
+      my_sum(1)(2) == my_sum(1, 2) == 3
+    #+END_SRC
 
 ** Composition
+#+ATTR_REVEAL: :frag (appear)
+  * Haskell:
 
- *Haskell*:
+    #+BEGIN_SRC haskell
+      import Data.Char (toUpper)
+    
+      get_first:: [a] -> a
+      get_first lis = lis !! 0
+    
+      upper_first_letter:: [Char] -> Char
+      upper_first_letter = toUpper . get_first
+    
+    #+END_SRC
 
-#+BEGIN_SRC haskell
-  import Data.Char (toUpper)
+  * Python:
+    #+BEGIN_SRC python
+       from toolz.functoolz import compose
+       from toolz.curried import get
 
-  get_first:: [a] -> a
-  get_first lis = lis !! 0
+       upcase_first_letter_classic = lambda word: word[0].upper()
+       # why is this better?
+       upcase_first_letter = compose(
+           get(0), # = lambda l: l[0]
+           lambda c: c.upper(),
+       )
 
-  upper_first_letter:: [Char] -> Char
-  upper_first_letter = toUpper . get_first
-
-#+END_SRC
-
- *Python*:
-
-#+BEGIN_SRC python
-  from toolz.functoolz import compose
-  from toolz.curried import get
-
-
-  upcase_first_letter = compose(
-      get(0), # lambda l: l[0]
-      lambda c: c.upper(),
-  )
-
-  upcase_first_letter('hello') == 'hello'[0].upper() == 'H'
-#+END_SRC
+       upcase_first_letter('hello') == upcase_first_letter_classic('hello') == 'H'
+    #+END_SRC
 
 ** Pipes!
 
@@ -515,77 +512,127 @@ Who gets a gift for Christmas??
 
 #+END_SRC
 
-*** Classic loopy
+*** Pipes to the rescue
+#+ATTR_REVEAL: :frag (appear)
 
-#+BEGIN_SRC python
-  def get_gifts_classic(people):
-      getting_gifts = []
-      for person in people:
-          if person['age'] < 18 and person['well_behaved']:
-              getting_gifts.append(person['name'])
+ * witout pipes:
+   #+BEGIN_SRC python
+     def get_gifts_classic(people):
+         getting_gifts = []
+         for person in people:
+             if person['age'] < 18 and person['well_behaved']:
+                 getting_gifts.append(person['name'])
+   
+         return getting_gifts
+   
+   #+END_SRC
 
-      return getting_gifts
+ * with pipes
+   #+BEGIN_SRC python
+      def get_gifts(people):
+          # ``pipe(data, f, g, h)`` is equivalent to ``h(g(f(data)))`
+          return pipe(people,
+              filter(lambda v: v['age'] < 18 and v['well_behaved']),
+              mapcat(get(['name'])),
+              list)
+   #+END_SRC
 
-#+END_SRC
+* Recursion
 
-*** Toolz pipes
+** What is recursion anyway
 
-#+BEGIN_SRC python
-  def get_gifts(people):
-      # ``pipe(data, f, g, h)`` is equivalent to ``h(g(f(data)))`
-      return pipe(people,
-          filter(lambda v: v['age'] < 18 and v['well_behaved']),
-          mapcat(get(['name'])),
-          list)
-#+END_SRC
+[[./images/recursion.gif]]
 
-*** Clojure/Elixir
+** Factorial
+#+ATTR_REVEAL: :frag (appear)
+  * Recursive factorial function
+    #+BEGIN_SRC python
+      def fact(n):
+          if n == 0: return 1
+          return n * fact(n-1)
 
-#+BEGIN_SRC clojure
+      fact(100)
+      # -> RuntimeError: maximum recursion depth exceeded
+    #+END_SRC
 
-  (-> "hello"
-      )
-#+END_SRC
+  * Recursion using tco and fn.py
+    #+BEGIN_SRC python
+      from fn import recur
 
-#+BEGIN_SRC elixir
-  String.reverse(String.capitalize("philip"))
-#+END_SRC
+      @recur.tco
+      def fact(n, acc=1):
+          if n == 0: return False, acc
+          return True, (n-1, acc*n)
+    #+END_SRC
+
+* Immutability
+** Dictionaries manipulations
+
+#+ATTR_REVEAL: :frag (appear)
+
+ * mutable
+   #+BEGIN_SRC python
+     def enrich_dict_mutable(dic):
+         for key in dic:
+             if key % 2 == 0:
+                 dic[key] = 'bar'
+   
+         keys_below_zero = [x for x in dic if x < 0]
+         for neg in keys_below_zero:
+             del dic[neg]
+   
+         return dic
+    #+END_SRC
+
+ * immutable
+   #+BEGIN_SRC python
+     from toolz import dictoolz
+
+     def enrich_dict_immutable(dic):
+         is_positive = lambda v: v >= 0
+         filtered = dicttoolz.keyfilter(is_positive, dic)
+         return dicttoolz.itemmap(_even_bar, filtered)
+   #+END_SRC
+
+** Dictoolz
+
+[[./images/dicttoolz.png]]
 
 * Streaming
 ** To infinity and beyond
 
 *** Infinite set of even numbers
-
-   *Haskell*:
+#+ATTR_REVEAL: :frag (appear)
+  * Haskell:
    
-#+BEGIN_SRC haskell
-  [x | x <- [0..], x `mod` 2 == 0]
-#+END_SRC
+    #+BEGIN_SRC haskell
+      [x | x <- [0..], x `mod` 2 == 0]
+    #+END_SRC
 
-   *Python*:
+  * Python:
 
-#+BEGIN_SRC python
-  def evens():
-      ev = 0
-      while True:
-          yield ev
-          ev += 2
-
-
-  gen_ev = evens()
-  for n in range(10):
-      print(next(gen_ev))
-#+END_SRC
-
-    *Smarter Python*:
+    #+BEGIN_SRC python
+      def evens():
+          ev = 0
+          while True:
+              yield ev
+              ev += 2
     
-#+BEGIN_SRC python
-  from itertools import count
-  from toolz.itertoolz import take
+    
+      gen_ev = evens()
+      for n in range(10):
+          print(next(gen_ev))
+    #+END_SRC
 
-  for ev in take(10, count(0, 2)):
-      print(ev)
-#+END_SRC
+  * Itertools/toolz:
+    
+     #+BEGIN_SRC python
+       from itertools import count
+       from toolz.itertoolz import take
+     
+       for ev in take(10, count(0, 2)):
+           print(ev)
+     #+END_SRC
 
 * Types
 ** Mypy
@@ -598,7 +645,6 @@ Who gets a gift for Christmas??
 * Side effects
 
 ** Pure computation?
-
 
 [[./images/haskell.png]]
 
@@ -643,52 +689,13 @@ Who gets a gift for Christmas??
 
 ** Hypothesis
 
-* Putting it all together
-
-* Quotes
-
-** 10 100
-
-#+BEGIN_QUOTE
-"It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." —Alan Perlis
-#+END_QUOTE
-   
-** Describing
-
-#+BEGIN_QUOTE
-Functional programming is like describing your problem to a mathematician.
-Imperative programming is like giving instructions to an idiot. - Arcus #scheme
-#+END_QUOTE
-
-** Cloud
-
-#+BEGIN_QUOTE
-  OOP cannot save us from the Cloud Monster anymore. - Ju Gonçalves
-#+END_QUOTE
-
-** Functions
-
-#+BEGIN_QUOTE
-
-Functional Programming is so called because a program consists entirely of functions.
-
-- John Hughes, Why Functional Programming Matters
-
-#+END_QUOTE
-
-** Python FP
-
-#+BEGIN_QUOTE
-using Python for Functional Programming it's like looking at a beautiful view through a dirty window - 
-
-#+END_QUOTE
-
 * Conclusion
 #+ATTR_REVEAL: :frag (appear)
   * Think about your data
   * Go immutable first
   * Compose functions
   * Bottom up rather than top down
+  * [[./images/happy_cat.jpg]]
 
 * Resources
 
@@ -732,12 +739,42 @@ using Python for Functional Programming it's like looking at a beautiful view th
   :reveal_background_size: 800px
   :END:
 
-** What if
-   :PROPERTIES:
-   :reveal_background: ./images/what_if_functional.jpg
-   :reveal_background_size: 800px
-   :END:
+** Toolz
 
- # Local Variables:
- # after-save-hook: (org-reveal-export-to-html)
- # End:
+ Toolz provides a suite of functions which have the following functional virtues:
+
+ *Composable*: They interoperate due to their use of core data structures.
+ *Pure*: They don’t change their inputs or rely on external state.
+ *Lazy*: They don’t run until absolutely necessary, allowing them to support large streaming data sets.
+
+*** Toolz capabilities
+
+  - *Dicttoolz*: immutable dictionaries functionality
+  - *Functoolz*: extend functools
+  - *Itertoolz*: extend itertools
+
+** Quotes
+
+*** 10 100
+
+ #+BEGIN_QUOTE
+ "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures." —Alan Perlis
+ #+END_QUOTE
+   
+*** Describing
+
+ #+BEGIN_QUOTE
+ Functional programming is like describing your problem to a mathematician.
+ Imperative programming is like giving instructions to an idiot. - Arcus #scheme
+ #+END_QUOTE
+
+*** Functions
+
+
+*** Python FP
+
+ #+BEGIN_QUOTE
+ using Python for Functional Programming it's like looking at a beautiful view through a dirty window - 
+
+ #+END_QUOTE
+
