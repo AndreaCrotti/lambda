@@ -334,7 +334,7 @@ them with the haskell equivalent.
   * Recursion (fn.py)
   * Immutability (toolz)
   * Streaming (itertools/toolz)
-  * Types (mypy/voluptuous?)
+  * Types (mypy)
 
 * What's a function, really
 
@@ -656,7 +656,24 @@ Who gets a gift for Christmas??
   :END:
 
 * Real life example
+** Problem
 
+- Read a csv file with gifts
+
+| person | gift       | price |
+|--------+------------+-------|
+| john   | bike       |   100 |
+| karl   | skateboard |    50 |
+| franz  | skates     |   200 |
+| john   | gloves     |    20 |
+
+- Merge gifts by person and write them on another CSV file
+| person | price |
+|--------+-------|
+| john   |   120 |
+| ...    |       |
+
+** First solution
 
 * Testing
 
