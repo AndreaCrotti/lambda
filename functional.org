@@ -709,41 +709,6 @@ Who gets a gift for Christmas??
   :reveal_background_size: 800px
   :END:
 
-* Real life example
-** Problem
-
-- Read a csv file with gifts
-
-| person | gift       | price |
-|--------+------------+-------|
-| john   | bike       |   100 |
-| karl   | skateboard |    50 |
-| franz  | skates     |   200 |
-| john   | gloves     |    20 |
-
-- Merge gifts by person and write them on another CSV file
-| person | price |
-|--------+-------|
-| john   |   120 |
-| ...    |       |
-
-** First solution
-
-* Testing
-
-** Quickcheck
-
-#+BEGIN_SRC haskell
-  import Test.QuickCheck
-
-  prop_revapp :: [Int] -> [Int] -> Bool
-  prop_revapp xs ys = reverse (xs++ys) == reverse xs ++ reverse ys
-
-  main = quickCheck prop_revapp
-#+END_SRC
-
-** Hypothesis
-
 * Conclusion
 #+ATTR_REVEAL: :frag (appear)
 
@@ -871,3 +836,38 @@ Who gets a gift for Christmas??
  # Local Variables:
  # after-save-hook: (org-reveal-export-to-html)
  # End:
+
+** Testing
+
+*** Quickcheck
+
+ #+BEGIN_SRC haskell
+   import Test.QuickCheck
+
+   prop_revapp :: [Int] -> [Int] -> Bool
+   prop_revapp xs ys = reverse (xs++ys) == reverse xs ++ reverse ys
+
+   main = quickCheck prop_revapp
+ #+END_SRC
+
+*** Hypothesis
+
+** Real life example
+*** Problem
+
+ - Read a csv file with gifts
+
+ | person | gift       | price |
+ |--------+------------+-------|
+ | john   | bike       |   100 |
+ | karl   | skateboard |    50 |
+ | franz  | skates     |   200 |
+ | john   | gloves     |    20 |
+
+ - Merge gifts by person and write them on another CSV file
+ | person | price |
+ |--------+-------|
+ | john   |   120 |
+ | ...    |       |
+
+*** First solution
