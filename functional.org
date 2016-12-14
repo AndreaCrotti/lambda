@@ -194,6 +194,11 @@ Even java added lambdas to the core language...
 ** Rip OOP
 
 #+BEGIN_NOTES
+Most people have been taught OOP and still use that as main paradigm at work.
+This quote from a professor at Carniage Mellon University explains quite
+well why OOP might not be the best choice in 2016 anymore.
+There are many universities that are in fact using Haskell/Ocaml or other FP
+languages to new students.
 
 #+END_NOTES
 
@@ -208,21 +213,39 @@ Even java added lambdas to the core language...
 
  #+end_quote
 
-** Concurrency
-  :PROPERTIES:
-  :reveal_background: ./images/multicore.gif
-  :reveal_background_size: 800px
-  :END:
+** FP advantages
 
-** 
+- easier concurrency
+- better composability
+- easier to test code
+
+** Why not everyone doing it?
+
+#+BEGIN_NOTES
+If it's all so much better why not everyone is already doing it?
+Well first it is actually happening and fp concepts are spreading more and more in every area.
+This graph however explains quite well for me what the problem is.
+Everyone can easily understand easily imperative programming, since you just tell the computer
+what to do.
+OOP adds some complexity but still everyone can quickly grasp concepts what's an object is,
+what inheritance mean and so and so forth.
+Functions and things like Monads/Monoids and functors are a lot hard to grasp, since they come
+from quite abstract mathematical concepts.
+However as this very scientific graph shows the rewards are massive, and will take your
+programming to the next level.
+#+END_NOTES
+
+[[./images/learning_curves_trimmed.jpg]]
+
+#+BEGIN_QUOTE
+  OOP cannot save us from the Cloud Monster anymore. - Ju Gonçalves
+#+END_QUOTE
 
 * What?
 
 #+BEGIN_NOTES
 
 #+END_NOTES
-
-Programming paradigm based on *lambda calculus* (Alonzo Church)
 
 - /functions/ are *first class* citizens
   - higher-order functions
@@ -240,13 +263,6 @@ Programming paradigm based on *lambda calculus* (Alonzo Church)
    :reveal_background: ./images/what_if_functional.jpg
    :reveal_background_size: 800px
    :END:
-
-* What's in for me
-
-- easier concurrency
-- better composability
-- easier to write tests
-- more generic abstractions
 
 * Haskell (1990)
 
