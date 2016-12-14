@@ -45,40 +45,56 @@ First introduced in *1930* by Alonzo Church, and based on:
 ** Lambda calculus primer
 
 Sample function definitions:
+
 #+ATTR_REVEAL: :frag (appear)
   * $\lambda x. x$
   * $\lambda x y. x$
   * $\lambda x. \lambda y. x$
 
-** Sample reduction
-#+ATTR_REVEAL: :frag (appear)
-  * Assuming these definitions:
-  * True: $\lambda x.\lambda y. x$
-  * False: $\lambda x.\lambda y. y$
-  * And: $\lambda p. \lambda q. p q p$
-  * Let's prove that *True And False == False*:
-  * $(\lambda p. \lambda q. p q p) (\lambda x.\lambda y. x) (\lambda x.\lambda y. y)$
-  * $\beta \rightarrow (\lambda q. (\lambda x. \lambda y. x) q (\lambda x. \lambda y. x)) (\lambda x.\lambda y. y)$
-  * $\beta \rightarrow (\lambda x. \lambda y. x) (\lambda x.\lambda y. y) (\lambda x.\lambda y. x)$
-  * $\beta \rightarrow (\lambda x. \lambda y. y)$
-  * *BINGO*
+** Lisp
 
-** Noone doing it
+Originally specified in *1958*, with Fortran and Assembly.
+
+#+BEGIN_SRC lisp
+  (defun id (x) ; $\lambda x. x
+    x)
+
+  (defun discard-second (x y) ; \lambda x y. x
+    (x))
+
+  (defun higher-order (x) ; \lambda x. \lambda y. x
+    (lambda (y) x))
+#+END_SRC
+
+[[./images/lisp_cycles.png]]
+
+# TODO: should I add somethiing about typed lambda calculus?
+
+** Back to the future
+
+#+ATTR_REVEAL: :frag (appear)
+
+ * Haskell
+ * Lisp
+ * Clojure
+ * Erlang
+ * Elixir
+ * Scala
+ * Elm
+ * (ReactJS)
+ * (ImmutableJS)
+
 * Why
   :PROPERTIES:
   :reveal_background: ./images/cat_liying.gif
   :reveal_background_size: 800px
   :END:
 
-** Concurrency
-  :PROPERTIES:
-  :reveal_background: ./images/multicore.gif
-  :reveal_background_size: 800px
-  :END:
+** Rip OOP
 
-** Immutability
+#+BEGIN_NOTES
 
-** OOP failure
+#+END_NOTES
 
  [[./images/oop_rip.jpg]]
 
@@ -91,16 +107,13 @@ Sample function definitions:
 
  #+end_quote
 
-** Functional languages
+** Concurrency
+  :PROPERTIES:
+  :reveal_background: ./images/multicore.gif
+  :reveal_background_size: 800px
+  :END:
 
-- Haskell
-- Lisp
-- Clojure
-- Erlang
-- Elixir
-- Scala
-- Elm
-
+** 
 
 * What?
 
@@ -160,19 +173,6 @@ it's still probably the best language to really learn functional programming.
   - type inference
 
 [[./images/haskell.png]]
-
-* What you can't do
-
- - Assignments
- - Mutable data structures
- - While/For Loops
- - Have control Over Order of Execution
- - Side Effects
-
-** Really?
-   :PROPERTIES:
-   :reveal_background: ./images/wtf.gif
-   :END:
 
 * Four pillars
 
@@ -602,6 +602,21 @@ using Python for Functional Programming it's like looking at a beautiful view th
 - [[https://code.facebook.com/posts/745068642270222/fighting-spam-with-haskell/][fighting spam with Haskell]]
 - [[https://www.quora.com/Which-universities-teach-their-first-CS-course-in-a-functional-programming-language][universities using FP in the first courses]]
 - [[http://haskell-servant.readthedocs.io/en/stable/introduction.html][Haskell Servant introduction]]
+
+* Extra material
+
+** Sample lambda calculus reduction
+#+ATTR_REVEAL: :frag (appear)
+  * Assuming these definitions:
+  * True: $\lambda x.\lambda y. x$
+  * False: $\lambda x.\lambda y. y$
+  * And: $\lambda p. \lambda q. p q p$
+  * Let's prove that *True And False == False*:
+  * $(\lambda p. \lambda q. p q p) (\lambda x.\lambda y. x) (\lambda x.\lambda y. y)$
+  * $\beta \rightarrow (\lambda q. (\lambda x. \lambda y. x) q (\lambda x. \lambda y. x)) (\lambda x.\lambda y. y)$
+  * $\beta \rightarrow (\lambda x. \lambda y. x) (\lambda x.\lambda y. y) (\lambda x.\lambda y. x)$
+  * $\beta \rightarrow (\lambda x. \lambda y. y)$
+  * *BINGO*
 
  # Local Variables:
  # after-save-hook: (org-reveal-export-to-html)
