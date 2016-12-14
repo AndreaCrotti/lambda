@@ -191,7 +191,6 @@ Even java added lambdas to the core language...
 * Christmas break #1
   :PROPERTIES:
   :reveal_background: ./images/cat_bed.gif
-  # :reveal_background_size: 800px
   :END:
 
 * Why
@@ -637,42 +636,18 @@ Who gets a gift for Christmas??
 * Types
 ** Mypy
 
- #+BEGIN_SRC python
-   def typed_addition(a: int, b: int) -> int:
-       return a + b
- #+END_SRC
-
-* Side effects
-
-** Pure computation?
-
-[[./images/haskell.png]]
-
-** Monads to the rescue
-
-** Call me Maybe
-
-[[./images/maybe.png]]
-
-#+BEGIN_SRC haskell
-  data Maybe a = Nothing | Just a
-#+END_SRC
-
-** Monads and Python
-
 #+BEGIN_SRC python
-  from pymonad.Maybe import *
-  from pymonad.List import *
-
-  # 'neg' knows nothing about functor types...
-  def neg(x):
-      return -x
-
-  # ... but that doesn't stop us from using it anyway.
-  neg * Just(9)                 # returns Just(-9)
-  neg * Nothing                 # returns Nothing
-  neg * List(1, 2, 3, 4)        # returns List(-1, -2, -3, -4)
+  def typed_addition(a: int, b: int) -> int:
+      return a + b
 #+END_SRC
+
+* Christmas break #4
+  :PROPERTIES:
+  :reveal_background: ./images/cat_walking.gif
+  :reveal_background_size: 800px
+  :END:
+
+* Real life example
 
 * Testing
 
@@ -778,3 +753,39 @@ Who gets a gift for Christmas??
 
  #+END_QUOTE
 
+** Side effects
+
+*** Pure computation?
+
+ [[./images/haskell.png]]
+
+*** Monads to the rescue
+
+*** Call me Maybe
+
+ [[./images/maybe.png]]
+
+ #+BEGIN_SRC haskell
+   data Maybe a = Nothing | Just a
+ #+END_SRC
+
+*** Monads and Python
+
+ #+BEGIN_SRC python
+   from pymonad.Maybe import *
+   from pymonad.List import *
+
+   # 'neg' knows nothing about functor types...
+   def neg(x):
+       return -x
+
+   # ... but that doesn't stop us from using it anyway.
+   neg * Just(9)                 # returns Just(-9)
+   neg * Nothing                 # returns Nothing
+   neg * List(1, 2, 3, 4)        # returns List(-1, -2, -3, -4)
+ #+END_SRC
+
+
+ # Local Variables:
+ # after-save-hook: (org-reveal-export-to-html)
+ # End:
