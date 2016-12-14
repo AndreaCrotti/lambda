@@ -148,7 +148,8 @@ constructor: \rightarrow that builds function types.
 #+END_QUOTE
 
 For every type \tau:
-*identity* $\lambda x:\tau . x: \tau \rightarrow \tau$
+
+(identity function) $\lambda x:\tau . x: \tau \rightarrow \tau$
 
 Foundation to ML and Haskell (1990):
 #+BEGIN_SRC haskell
@@ -219,7 +220,7 @@ languages to new students.
 
 - easier concurrency
 - better composability
-- easier to test code
+- code that is easier to test and to reason about
 
 ** Why not everyone doing it?
 
@@ -453,9 +454,8 @@ functions as arguments or returns a function as its result (or both).
 
 ** Partial application
 #+BEGIN_QUOTE
-Partial application (or partial function application) refers to the
-process of fixing a number of arguments to a function, producing
-another function of smaller arity
+Partial application refers to the process of fixing a number of
+arguments to a function, producing another function of smaller arity.
 #+END_QUOTE
 
 *** Partial application
@@ -482,10 +482,9 @@ another function of smaller arity
 ** Currying
 
 #+BEGIN_QUOTE
-Currying is the technique of translating the evaluation of a
-function that takes multiple arguments (or a tuple of arguments)
-into evaluating a sequence of functions, each with a single
-argument.
+Currying is the technique of translating the evaluation of a function
+that takes multiple arguments into evaluating a sequence of functions,
+each with a single argument.
 #+END_QUOTE
 
 *** Currying
@@ -524,6 +523,7 @@ the result of another to produce a third function.
 
 *** Composition
 #+ATTR_REVEAL: :frag (appear)
+  * Write a function that uppercases the first leters of a string
   * Haskell:
 
     #+BEGIN_SRC haskell
@@ -544,12 +544,11 @@ the result of another to produce a third function.
        from toolz.curried import get
 
        upcase_first_letter_classic = lambda word: word[0].upper()
-       # why is this better?
+
        upcase_first_letter = compose(
            get(0), # = lambda l: l[0]
            lambda c: c.upper(),
        )
-
        upcase_first_letter('hello') == upcase_first_letter_classic('hello') == 'H'
     #+END_SRC
 
