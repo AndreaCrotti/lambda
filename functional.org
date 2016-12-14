@@ -109,7 +109,7 @@ function to 2 and apply the result of that to 3 I get this chain of evaluation.
 Originally specified in *1958*, with Fortran and Assembly.
 
 #+BEGIN_SRC lisp
-  (defun id (x) x) ; $\lambda x. x
+  (defun id (x) x) ; \lambda x. x
 
   (defun discard-second (x y) (x)) ; \lambda x y. x
 
@@ -152,7 +152,7 @@ For every type \tau:
 
 Foundation to ML and Haskell (1990):
 #+BEGIN_SRC haskell
-  id :: a - > a
+  id :: a -> a
   id x = x
 #+END_SRC
 
@@ -176,17 +176,15 @@ Even java added lambdas to the core language...
 #+END_NOTES
 
 #+ATTR_REVEAL: :frag (appear)
-
- * Haskell
- * Clojure / Clojurescript
- * Erlang
- * Elixir
- * Scala (Spark)
- * Java's Lambda
- * Elm
- * (ReactJS)
- * (ImmutableJS)
-
+  * Haskell
+  * Clojure / Clojurescript
+  * Erlang
+  * Elixir
+  * Scala (Spark)
+  * Java's Lambda
+  * Elm
+  * (ReactJS)
+  * (ImmutableJS)
 
 * Christmas break #1
   :PROPERTIES:
@@ -313,7 +311,7 @@ Functional Programming is so called because a program consists entirely of funct
     #+BEGIN_SRC haskell
       all_evens = [x | x <- [0..], x `mod` 2 == 0]
       take 10 all_evens -- [0,2,4,6,8,10,12,14,16,18]
-      drop 10 $ take 10 all_evens -- [20,22,24,26,28,30,32,34,36,38]
+      take 10 $ drop 10 all_evens -- [20,22,24,26,28,30,32,34,36,38]
     #+END_SRC
 
 * Christmas break #2
@@ -330,7 +328,7 @@ them with the haskell equivalent.
 #+END_NOTES
 
 #+ATTR_REVEAL: :frag (appear)
-  * Function composition (toolz/functools)
+  * Function composition (toolz)
   * Recursion (fn.py)
   * Immutability (toolz)
   * Streaming (itertools/toolz)
@@ -386,7 +384,8 @@ with the property that each input is related to exactly one output.
   * Generic callable interface
     
     #+BEGIN_SRC python
-      type(adder) == function # -> False
+      type(my_adder) == function # -> False
+      # but they are both callable
       callable(adder)   # -> True
       callable(my_adder) # -> True
     #+END_SRC
@@ -414,7 +413,7 @@ with the property that each input is related to exactly one output.
       my_santa = Santa()
       Santa.give_gift(my_santa, 'boy', 'toy') # -> Good boy boy, here is your toy
 
-      give_gift = lambda santa, boy, toy: santa.give_gift(santa, boy, toy)
+      give_gift = lambda santa, boy, toy: santa.give_gift(boy, toy)
     #+END_SRC
 
 * Christmas break #3
@@ -424,7 +423,13 @@ with the property that each input is related to exactly one output.
 
 * Function composition
 ** Partial application
+#+BEGIN_QUOTE
+Partial application (or partial function application) refers to the
+process of fixing a number of arguments to a function, producing
+another function of smaller arity
+#+END_QUOTE
 
+*** Partial application
 #+ATTR_REVEAL: :frag (appear)
  * Haskell:
    #+BEGIN_SRC haskell
@@ -435,7 +440,7 @@ with the property that each input is related to exactly one output.
      add_three 2 == 5
    #+END_SRC
 
- * Python:
+ * Functoolz.partial:
    #+BEGIN_SRC python
      from toolz.functoolz import partial
    
@@ -446,6 +451,15 @@ with the property that each input is related to exactly one output.
    #+END_SRC
 
 ** Currying
+
+#+BEGIN_QUOTE
+Currying is the technique of translating the evaluation of a
+function that takes multiple arguments (or a tuple of arguments)
+into evaluating a sequence of functions, each with a single
+argument.
+#+END_QUOTE
+
+*** Currying
 #+ATTR_REVEAL: :frag (appear)
    * Haskell:
      #+BEGIN_SRC haskell
@@ -469,18 +483,30 @@ with the property that each input is related to exactly one output.
     #+END_SRC
 
 ** Composition
+
+#+BEGIN_QUOTE
+Function composition is the pointwise application of one function to
+the result of another to produce a third function.
+#+END_QUOTE
+
+- $f: X \rightarrow Y$ and $g: Y \rightarrow Z$
+- $f . g: X \rightarrow Z$
+- $(f . g) 2 \equiv f(g(2))$
+
+*** Composition
 #+ATTR_REVEAL: :frag (appear)
   * Haskell:
 
     #+BEGIN_SRC haskell
       import Data.Char (toUpper)
-    
+      -- toUpper :: Char -> Char
+
       get_first:: [a] -> a
       get_first lis = lis !! 0
-    
+
       upper_first_letter:: [Char] -> Char
       upper_first_letter = toUpper . get_first
-    
+
     #+END_SRC
 
   * Python:
@@ -568,7 +594,6 @@ Who gets a gift for Christmas??
 ** Dictionaries manipulations
 
 #+ATTR_REVEAL: :frag (appear)
-
  * mutable
    #+BEGIN_SRC python
      def enrich_dict_mutable(dic):
@@ -692,7 +717,9 @@ Who gets a gift for Christmas??
 
 * Conclusion
 #+ATTR_REVEAL: :frag (appear)
-  * Simple data structures
+
+  * Try Haskell/Clojure/Scala/whatever
+  * Use simple data structures
   * Go immutable
   * Compose functions
   * Build your bottom-up
