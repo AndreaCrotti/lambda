@@ -31,11 +31,13 @@ I can't claim to be an expert though, I still have lots to learn, but I'm defini
   * Brief introduction to Haskell
   * Functional patterns in Python/Haskell
   
-* History
+* What if
   :PROPERTIES:
-  :reveal_background: ./images/cat_bed.gif
-  # :reveal_background_size: 800px
+  :reveal_background: ./images/what_if_functional.jpg
+  :reveal_background_size: 800px
   :END:
+
+* History
 
 ** First there was lambda calculus
 
@@ -185,11 +187,14 @@ Even java added lambdas to the core language...
  * (ReactJS)
  * (ImmutableJS)
 
-* Why
+
+* Christmas break 1
   :PROPERTIES:
-  :reveal_background: ./images/cat_liying.gif
-  :reveal_background_size: 800px
+  :reveal_background: ./images/cat_bed.gif
+  # :reveal_background_size: 800px
   :END:
+
+* Why
 
 ** Rip OOP
 
@@ -244,54 +249,53 @@ programming to the next level.
 * What?
 
 #+BEGIN_NOTES
-
+Trying to define functional programming is not that easy, since as we could
+see lambda calculus was just a very primitive mathematical foundation.
+Many functional programming languages differ also quite significantly, but
+these principles are quite general.
+We are going to see very soon examples of all these concepts in both Haskell and Python.
 #+END_NOTES
 
-- /functions/ are *first class* citizens
-  - higher-order functions
-  - partial application
-  - currying
+#+ATTR_REVEAL: :frag (appear)
+  - Functions are *first class* citizens: higher-order, partial application, currying..
+  - Data is immutable
+  - sequences are *lazy* by default
+  - Functions are *pure*
 
-- Functions are *pure*
-  - immutable data: *no state*
-  - encapsulated side effects
+** Haskell (1990)
 
-- lazy sequences
+ #+BEGIN_NOTES
+ The original intention was to talk about Python but in reality
+ my first real encounter with FP was with Haskell and that's probably
+ the main reason why I got interested in it.
 
-** What if
-   :PROPERTIES:
-   :reveal_background: ./images/what_if_functional.jpg
-   :reveal_background_size: 800px
-   :END:
+ Haskell is a relatively old language (same age as Python) but it has
+ been for most of its history a niche research language, that people
+ used to write papers with.
 
-* Haskell (1990)
+ It's probably until now the most "complete" and pure functional programming
+ language out there, and in some ways it's just incredibly beautiful.
 
-#+BEGIN_NOTES
-The original intention was to talk about Python but in reality
-my first real encounter with FP was with Haskell and that's probably
-the main reason why I got interested in it.
+ This joke here refers to the fact that while there is so much interest in
+ Haskell not as many people use it in production, but in any case
+ it's still probably the best language to really learn functional programming.
+ #+END_NOTES
 
-Haskell is a relatively old language (same age as Python) but it has
-been for most of its history a niche research language, that people
-used to write papers with.
+   - pure
+   - lazy
+   - pattern matching
+   - algebraic data types
+   - type inference
 
-It's probably until now the most "complete" and pure functional programming
-language out there, and in some ways it's just incredibly beautiful.
+ [[./images/haskell.png]]
 
-This joke here refers to the fact that while there is so much interest in
-Haskell not as many people use it in production, but in any case
-it's still probably the best language to really learn functional programming.
-#+END_NOTES
+* Christmas break 2
+  :PROPERTIES:
+  :reveal_background: ./images/cat_liying.gif
+  :reveal_background_size: 800px
+  :END:
 
-  - pure
-  - lazy
-  - pattern matching
-  - algebraic data types
-  - type inference
-
-[[./images/haskell.png]]
-
-* Four pillars
+* FP in practice
 
 #+BEGIN_NOTES
 Now we are going to see more in detail four concepts from functional programming,
@@ -307,22 +311,13 @@ purity refers to the absence of side effects.
 #+END_NOTES
 
 #+ATTR_REVEAL: :frag (appear)
-
   * Function composition (toolz/stdlib)
+  * Recursion
   * Immutability (toolz)
   * Streaming (itertools/toolz)
   * Purity?
   * Types (mypy/voluptuous?)
   * Pattern matching ?
-
-# TODO remove libraries from here if already mentioning them above
-Libraries used:
-#+ATTR_REVEAL: :frag (appear)
-  * itertools
-  * functools
-  * toolz
-  * fn.py
-  * mypy
 
 * What's a function, really
 
@@ -396,7 +391,6 @@ with the property that each input is related to exactly one output.
       Santa.give_gift(my_santa, 'boy', 'toy') # -> Good boy boy, here is your toy
     #+END_SRC
 
-
 * Toolz
 
 Toolz provides a suite of functions which have the following functional virtues:
@@ -432,7 +426,6 @@ Toolz provides a suite of functions which have the following functional virtues:
 #+END_SRC
 
 ** Go immutable
-
 
 * Function composition
 ** Partial application
@@ -561,7 +554,6 @@ Who gets a gift for Christmas??
   String.reverse(String.capitalize("philip"))
 #+END_SRC
 
-
 * Streaming
 ** To infinity and beyond
 
@@ -598,7 +590,6 @@ Who gets a gift for Christmas??
       print(ev)
 #+END_SRC
 
-
 * Types
 ** Mypy
 
@@ -606,7 +597,6 @@ Who gets a gift for Christmas??
    def typed_addition(a: int, b: int) -> int:
        return a + b
  #+END_SRC
-
 
 * Side effects
 
@@ -744,6 +734,12 @@ using Python for Functional Programming it's like looking at a beautiful view th
   :reveal_background: ./images/lisp_cycles.png
   :reveal_background_size: 800px
   :END:
+
+** What if
+   :PROPERTIES:
+   :reveal_background: ./images/what_if_functional.jpg
+   :reveal_background_size: 800px
+   :END:
 
  # Local Variables:
  # after-save-hook: (org-reveal-export-to-html)
