@@ -635,11 +635,19 @@ Who gets a gift for Christmas??
 
 * Types
 ** Mypy
+#+ATTR_REVEAL: :frag (appear)
+  * Types please!
+    #+BEGIN_SRC python
+      def typed_addition(a: int, b: int) -> int:
+          return a + b:
 
-#+BEGIN_SRC python
-  def typed_addition(a: int, b: int) -> int:
-      return a + b
-#+END_SRC
+      typed_addition(1, "hello")
+    #+END_SRC
+
+  * Run *pip install mypy-lang && mypy mymodule.py*:
+    code/my_types.py:15: error: Argument 2 to "typed_addition" has incompatible type "str"; expected "int"
+
+  * [[./images/cat_shock.gif]]
 
 * Christmas break #4
   :PROPERTIES:
@@ -648,6 +656,7 @@ Who gets a gift for Christmas??
   :END:
 
 * Real life example
+
 
 * Testing
 
@@ -666,10 +675,10 @@ Who gets a gift for Christmas??
 
 * Conclusion
 #+ATTR_REVEAL: :frag (appear)
-  * Think about your data
-  * Go immutable first
+  * Simple data structures
+  * Go immutable
   * Compose functions
-  * Bottom up rather than top down
+  * Build your bottom-up
   * [[./images/happy_cat.jpg]]
 
 * Resources
