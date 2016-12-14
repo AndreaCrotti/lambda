@@ -287,7 +287,15 @@ We are going to see very soon examples of all these concepts in both Haskell and
    - algebraic data types
    - type inference
 
- [[./images/haskell.png]]
+#+BEGIN_SRC haskell
+  fib 0 = 1
+  fib 1 = 1
+  fib n = fib (n - 1) + fib (n - 2)
+
+#+END_SRC
+
+#+RESULTS:
+
 
 * Christmas break 2
   :PROPERTIES:
@@ -298,26 +306,15 @@ We are going to see very soon examples of all these concepts in both Haskell and
 * FP in practice
 
 #+BEGIN_NOTES
-Now we are going to see more in detail four concepts from functional programming,
-and exploring them in Python and Haskell, comparing the two together.
 
-The first pillar is function and function composition, so what functions actually are,
-what are their propreties and how do we compose them.
-The second is immutability, which is simply the idea of trying to never mutate your
-data in place, but always create new objects for every mutation.
-
-Streaming refers to the ability to work on infinite infinite sequences, and finally
-purity refers to the absence of side effects.
 #+END_NOTES
 
 #+ATTR_REVEAL: :frag (appear)
-  * Function composition (toolz/stdlib)
-  * Recursion
+  * Function composition (toolz/functools)
+  * Recursion (fn.py)
   * Immutability (toolz)
   * Streaming (itertools/toolz)
-  * Purity?
   * Types (mypy/voluptuous?)
-  * Pattern matching ?
 
 * What's a function, really
 
