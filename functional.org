@@ -93,7 +93,15 @@ that is able to define all possible valid programs.
 ** Lisp
 
 #+BEGIN_NOTES
-In 1958 Lisp was invented, and 
+In 1958 Lisp was invented, and at the time the other two mainstream languages were Fortran and Assembly.
+This is quite impressive considering that for example C was created in the 1970s.
+Lisp was greatly inspired by Lambda calculus, as we can see from these examples the syntax is basically the same.
+In the higher order function example we can see a *defun* and a *lambda*, which are exactly the same as *def* and *lambda*
+in Python, a named and an anonymous function.
+Lambda calculus didn't have named functions for example but obviously a language that can't name things is not very practical
+in the end.
+So then we can see a very simple substitution (the beta reduction we were talking about), if I apply the higher-order
+function to 2 and apply the result of that to 3 I get this chain of evaluation.
 #+END_NOTES
 
 Originally specified in *1958*, with Fortran and Assembly.
@@ -110,12 +118,26 @@ Originally specified in *1958*, with Fortran and Assembly.
 Sample substitution:
 
 #+BEGIN_SRC lisp
-  (higher-order 2)
-  (lambda (y) 2)
+  ((higher-order 2) 3)  ; same as higher-order(2)(3)
+  ((lambda (y) 2) 3)         ; same as (lambda y: 2)(3)
+  2
 #+END_SRC
 
 ** Typed lambda calculus
    
+#+BEGIN_NOTES
+Typed lambda calculus is a generalisation of lambda calculus, still introduced by Alonzo,
+and can be defined as is a typed interpretation of the lambda calculus with only one type
+constructor: \rightarrow that builds function types.
+
+In short it means that we add the capability to define types into the calculus, and it was the
+foundation of other funtional languages like ML and Haskel.
+The identify function is more or less the same as you can see, and in Haskell we can just
+define it like this.
+The double colon in Haskell defines the type, and a is just a generic type, which means
+that id works for every possible type.
+#+END_NOTES
+
 Introduced in *1940* by Alonzo Church.
 
 #+BEGIN_QUOTE
@@ -126,22 +148,39 @@ constructor: \rightarrow that builds function types.
 For every type \tau:
 *identity* $\lambda x:\tau . x: \tau \rightarrow \tau$
 
-Foundation to ML and Haskell:
+Foundation to ML and Haskell (1990):
 #+BEGIN_SRC haskell
   id :: a - > a
   id x = x
 #+END_SRC
 
-** Back to the future
+** Back to the present
+
+#+BEGIN_NOTES
+If we go back to 2016 the scenario we see it's really interesting, because there are languages
+like Haskell that it's not just an academic toy anymore, but used also by companies like Facebook
+that has millions of lines of Haskell in their hyper sophisticated anti-spam system.
+Clojure and Clojurescript (a quite new lisp dialect) are also growing a lot, used by companies like
+Deutsche bank/Walmart/mail online and much more.
+Erlang is much older but was for example one of the causes of the success of whatsapp.
+It's a functioal programming language incredibly strong on concurrency, and there are stories
+that say that they were capable of handling millions of concurrent requests on a single node
+using Erlang at Whatsapp.
+
+Scala is another interesting language, and combines both OOP and FP quite nicely, having a massive
+success the Java world.
+
+Even java added lambdas to the core language...
+#+END_NOTES
 
 #+ATTR_REVEAL: :frag (appear)
 
  * Haskell
- * Lisp
- * Clojure
+ * Clojure / Clojurescript
  * Erlang
  * Elixir
- * Scala
+ * Scala (Spark)
+ * Java's Lambda
  * Elm
  * (ReactJS)
  * (ImmutableJS)
