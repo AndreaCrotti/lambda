@@ -1,5 +1,5 @@
 #+AUTHOR: Andrea Crotti (@andreacrotti)
-#+TITLE: Functional Programming, Christmas edition
+#+TITLE: Functional Programming and Python
 #+OPTIONS: num:nil toc:nil ^:nil tex:t reveal_progress:t reveal_control:t reveal_overview:t
 #+REVEAL_TRANS: none
 #+REVEAL_SPEED: fast
@@ -12,10 +12,16 @@
 Welcome all and thanks for coming.
 Today we are going to talk about functional programming, (so if you are in the wrong room please run now).
 We'll first see a bit of history, give an overview of probably the most iconic functional programming language,
-and finally get to the juicy part, how do we actually do it in Python and why.
+and finally get to the juicy part, what we can do in Python and how.
 
-I have a lot of material so sorry in advance if I might go a bit too fast, all the material will be fully
-availabe and I'll share everything with you as soon as the talk is done.
+I have a lot of material so sorry in advance if I might go a bit too fast, all the material will be available,
+so just sit back and relax.
+
+To just explain in two words who I am, I'm mainly a Python backend developer (even if now doing lots of devops work)
+but have been for the last few years more and more interested in functional programming.
+I did my bachelor thesis with Haskell long time ago, studied Clojure/Scala and today I just wanted
+to share a bit of this knowledge to you.
+I can't claim to be an expert though, I still have lots to learn, but I'm definitively enjoying the ride.
 #+END_NOTES
 
 #+ATTR_REVEAL: :frag (appear)
@@ -28,47 +34,103 @@ availabe and I'll share everything with you as soon as the talk is done.
 * History
   :PROPERTIES:
   :reveal_background: ./images/cat_bed.gif
-  :reveal_background_size: 800px
+  # :reveal_background_size: 800px
   :END:
 
 ** First there was lambda calculus
+
+#+BEGIN_NOTES
+Functional programming is a lot older than some people might think.
+It was the early 1930 when Alonzo Church first introduced it, and wikipedia defines lambda calculus
+as a turing complete, universal model of computation that can be used to simulate any single-taped Turing machine.
+This might sound a bit cryptic if you haven't studied computer science, but we could say to greatly simplify
+that imperative program can be written functionally, and viceversa.
+
+It's based on two extremely simple concepts, function abstraction and variable binding and substitution.
+
+Just to clarify both Turing machines and lambda calculus can't really be used directly, but they are
+extremely important as foundations of what we can actually compute.
+#+END_NOTES
+
+First introduced in *1930* by Alonzo Church
 
 #+BEGIN_QUOTE
 *Turing complete, universal* model of computation that can be used to simulate any single-taped Turing machine.
 #+END_QUOTE
 
-First introduced in *1930* by Alonzo Church, and based on:
+Imperative \equiv Functional
+
+Lambda calculus is based on:
 
 - function abstraction
 - variable binding and substitution
 
 ** Lambda calculus primer
 
-Sample function definitions:
+#+BEGIN_NOTES
+Here is a simple example of how lambda calculus looks like.
+The first function is just the identity function, given x it retuns x.
+The second is a function that takes two arguments, and always returns the first 1.
+In this case /y/ is a free variable, while x is a bound by the lambda.
+The last example is a function returning another function.
+The syntax itself is extremely simple and what's even more interesting is that there are only two reduction
+rules, alpha which can be seen as simple renaming, and beta which actually does variable substitution.
+
+I'll show a simple example in a second, but the interesting part is how little you need to define a formalism
+that is able to define all possible valid programs.
+#+END_NOTES
 
 #+ATTR_REVEAL: :frag (appear)
-  * $\lambda x. x$
-  * $\lambda x y. x$
-  * $\lambda x. \lambda y. x$
+  - function definitions
+    * $\lambda x. x$
+    * $\lambda x y. x$
+    * $\lambda x. \lambda y. x$
+
+  - Reduction rules
+    * \alpha reduction (renaming)
+    * \beta reduction (substitution)
 
 ** Lisp
+
+#+BEGIN_NOTES
+In 1958 Lisp was invented, and 
+#+END_NOTES
 
 Originally specified in *1958*, with Fortran and Assembly.
 
 #+BEGIN_SRC lisp
-  (defun id (x) ; $\lambda x. x
-    x)
+  (defun id (x) x) ; $\lambda x. x
 
-  (defun discard-second (x y) ; \lambda x y. x
-    (x))
+  (defun discard-second (x y) (x)) ; \lambda x y. x
 
-  (defun higher-order (x) ; \lambda x. \lambda y. x
-    (lambda (y) x))
+  (defun higher-order (x) (lambda (y) x)) ; \lambda x. \lambda y. x
+
 #+END_SRC
 
-[[./images/lisp_cycles.png]]
+Sample substitution:
 
-# TODO: should I add somethiing about typed lambda calculus?
+#+BEGIN_SRC lisp
+  (higher-order 2)
+  (lambda (y) 2)
+#+END_SRC
+
+** Typed lambda calculus
+   
+Introduced in *1940* by Alonzo Church.
+
+#+BEGIN_QUOTE
+is a typed interpretation of the lambda calculus with only one type
+constructor: \rightarrow that builds function types.
+#+END_QUOTE
+
+For every type \tau:
+*identity* $\lambda x:\tau . x: \tau \rightarrow \tau$
+
+Foundation to ML and Haskell:
+#+BEGIN_SRC haskell
+  id :: a - > a
+  id x = x
+#+END_SRC
 
 ** Back to the future
 
@@ -580,7 +642,11 @@ using Python for Functional Programming it's like looking at a beautiful view th
 #+END_QUOTE
 
 * Conclusion
-
+#+ATTR_REVEAL: :frag (appear)
+  * Think about your data
+  * Go immutable first
+  * Compose functions
+  * Bottom up rather than top down
 
 * Resources
 
@@ -617,6 +683,12 @@ using Python for Functional Programming it's like looking at a beautiful view th
   * $\beta \rightarrow (\lambda x. \lambda y. x) (\lambda x.\lambda y. y) (\lambda x.\lambda y. x)$
   * $\beta \rightarrow (\lambda x. \lambda y. y)$
   * *BINGO*
+
+** 
+  :PROPERTIES:
+  :reveal_background: ./images/lisp_cycles.png
+  :reveal_background_size: 800px
+  :END:
 
  # Local Variables:
  # after-save-hook: (org-reveal-export-to-html)
