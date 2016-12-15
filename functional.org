@@ -14,22 +14,6 @@
 
 * Overview
 
-#+BEGIN_NOTES
-Welcome all and thanks for coming.
-Today we are going to talk about functional programming, (so if you are in the wrong room please run now).
-We'll first see a bit of history, give an overview of probably the most iconic functional programming language,
-and finally get to the juicy part, what we can do in Python and how.
-
-I have a lot of material so sorry in advance if I might go a bit too fast, all the material will be available,
-so just sit back and relax.
-
-To just explain in two words who I am, I'm mainly a Python backend developer (even if now doing lots of devops work)
-but have been for the last few years more and more interested in functional programming.
-I did my bachelor thesis with Haskell long time ago, studied Clojure/Scala and today I just wanted
-to share a bit of this knowledge to you.
-I can't claim to be an expert though, I still have lots to learn, but I'm definitively enjoying the ride.
-#+END_NOTES
-
 #+ATTR_REVEAL: :frag (appear)
   * A bit of history
   * Why functional programming matters
