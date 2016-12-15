@@ -434,7 +434,7 @@ functions as arguments or returns a function as its result (or both).
 
     #+BEGIN_SRC haskell
       my_map :: (a -> b) -> [a] -> [b]
-      my_map f (x:xs) = [f x] ++ (map f xs)
+      my_map f (x:xs) = [f x] ++ (my_map f xs)
 
       my_map (* 2) [1, 2, 3] -- [2, 3, 6]
     #+END_SRC
@@ -522,7 +522,7 @@ the result of another to produce a third function.
 
 *** Composition
 #+ATTR_REVEAL: :frag (appear)
-  * Write a function that uppercases the first leters of a string
+  * Write a function that uppercases the first letter of a given word
   * Haskell:
 
     #+BEGIN_SRC haskell
@@ -713,7 +713,7 @@ Who gets a gift for Christmas??
   * Use simple data structures
   * Go immutable
   * Compose functions
-  * Build your bottom-up
+  * Build your code bottom up rather than top-down
   * [[./images/happy_cat.jpg]]
 
 * Resources
@@ -752,13 +752,7 @@ Who gets a gift for Christmas??
   * $\beta \rightarrow (\lambda x. \lambda y. y)$
   * *BINGO*
 
-** 
-  :PROPERTIES:
-  :reveal_background: ./images/lisp_cycles.png
-  :reveal_background_size: 800px
-  :END:
-
-** Toolz
+** Toolz intro
 
  Toolz provides a suite of functions which have the following functional virtues:
 
@@ -772,7 +766,7 @@ Who gets a gift for Christmas??
   - *Functoolz*: extend functools
   - *Itertoolz*: extend itertools
 
-** Quotes
+** Other quotes
 
 *** 10 100
 
@@ -848,23 +842,3 @@ Who gets a gift for Christmas??
  #+END_SRC
 
 *** Hypothesis
-
-** Real life example
-*** Problem
-
- - Read a csv file with gifts
-
- | person | gift       | price |
- |--------+------------+-------|
- | john   | bike       |   100 |
- | karl   | skateboard |    50 |
- | franz  | skates     |   200 |
- | john   | gloves     |    20 |
-
- - Merge gifts by person and write them on another CSV file
- | person | price |
- |--------+-------|
- | john   |   120 |
- | ...    |       |
-
-*** First solution
